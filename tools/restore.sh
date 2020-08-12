@@ -49,7 +49,7 @@ do_you_want_to_continue() {
 }
 #########################
 restore_zsh_with_normal_mode() {
-    if (whiptail --title "RESTORE FILE" --yes-button '最新latest' --no-button 'select manually' --yesno "您是想要还原最新文件，还是手动选择备份文件？" 0 50); then
+    if (whiptail --title "RESTORE FILE" --yes-button '最新latest' --no-button 'select manually' --yesno "您是想要还原最新文件,还是手动选择备份文件？" 9 50); then
         check_dir
         cd ${START_DIR}
         RESTORE=$(ls -lth ./zsh*tar* | grep ^- | head -n 1 | awk -F ' ' '$0=$NF')
