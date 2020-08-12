@@ -28,6 +28,26 @@ press_enter_to_continue() {
     read
 }
 ################
+do_you_want_to_continue() {
+    echo "${YELLOW}Do you want to continue?[Y/n]${RESET}"
+    echo "Press ${GREEN}enter${RESET} to ${BLUE}continue${RESET},type ${YELLOW}n${RESET} to ${BLUE}return.${RESET}"
+    echo "按${GREEN}回车键${RESET}${BLUE}继续${RESET}，输${YELLOW}n${RESET}${BLUE}返回${RESET}"
+    read opt
+    case $opt in
+    y* | Y* | "") ;;
+
+    n* | N*)
+        echo "skipped."
+        ${RETURN_TO_WHERE}
+        ;;
+    *)
+        echo "Invalid choice. skipped."
+        ${RETURN_TO_WHERE}
+        #beta_features
+        ;;
+    esac
+}
+#########################
 restore_zsh_with_normal_mode() {
     if (whiptail --title "RESTORE FILE" --yes-button '最新latest' --no-button 'select manually' --yesno "您是想要还原最新文件，还是手动选择备份文件？" 0 50); then
         check_dir
