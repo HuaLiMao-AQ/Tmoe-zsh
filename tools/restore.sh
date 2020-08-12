@@ -164,7 +164,6 @@ select_file_manually() {
         elif (($number >= 0 && $number <= $count)); then
             eval RESTORE=${restore_file_name[number]}
             # cp -fr "${START_DIR}/$choice" "$DIR/restore_file.properties"
-            RETURN_TO_WHERE='restore_menu'
             do_you_want_to_continue
             uncompress_tar_file
             break
@@ -224,7 +223,6 @@ restore_the_latest_backup_file() {
         select_file_manually
     else
         ls -lh ${RESTORE}
-        RETURN_TO_WHERE='restore_menu'
         do_you_want_to_continue
         uncompress_tar_file
     fi
