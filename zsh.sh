@@ -796,6 +796,7 @@ RESTOREZSH() {
 		#bash ${HOME}/.termux-zsh/tools/restore.sh
 		#else
 		cd ${HOME}/.termux-zsh
+		git fetch --depth=2
 		git reset --hard origin/master
 		git pull origin master --allow-unrelated-histories
 	fi
@@ -884,7 +885,7 @@ UPDATEPLUGINS() {
 	git_pull_powerlevel_10k
 	#upgrade zsh plugins and tool
 	cd "${HOME}/.termux-zsh"
-	#git fetch --depth=1
+	git fetch --depth=2
 	git reset --hard origin/master
 	git pull --depth=1 origin master --allow-unrelated-histories
 	git_pull_oh_my_zsh
