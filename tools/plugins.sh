@@ -28,10 +28,14 @@ press_enter_to_continue() {
     read
 }
 ################
-do_you_want_to_continue() {
+do_you_want_to_continue_00() {
     echo "${YELLOW}Do you want to continue?[Y/n]${RESET}"
     echo "Press ${GREEN}enter${RESET} to ${BLUE}continue${RESET},type ${YELLOW}n${RESET} to ${BLUE}return.${RESET}"
     echo "按${GREEN}回车键${RESET}${BLUE}继续${RESET}，输${YELLOW}n${RESET}${BLUE}返回${RESET}"
+}
+#########
+do_you_want_to_continue() {
+    do_you_want_to_continue_00
     read opt
     case $opt in
     y* | Y* | "") ;;
@@ -47,19 +51,37 @@ do_you_want_to_continue() {
     esac
 }
 #############
+do_you_want_to_continue_02() {
+    do_you_want_to_continue_00
+    read opt
+    case $opt in
+    y* | Y* | "") ;;
+
+    n* | N*)
+        echo "skipped."
+        ${RETURN_TO_MENU}
+        ;;
+    *)
+        echo "Invalid choice. skipped."
+        ${RETURN_TO_MENU}
+        ;;
+    esac
+}
+###############
 tmoe_zsh_plugin_main_menu() {
     RETURN_TO_WHERE='tmoe_zsh_plugin_main_menu'
     TMOE_ZSH_FILE="${HOME}/.zshrc"
     ZSH_README_FILE_NAME='README.md'
+    ZSH_README_FILE_NAME_02=''
     TMOE_OPTION=$(whiptail --title "PLUGINS" --menu "您想要管理哪个首字母开头的插件？\nBecause there are too many plugins, alphabetical sorting." 0 50 0 \
-        "01" "A-C(a,b,c)" \
-        "02" "D-G(d,e,f,g)" \
-        "03" "H-M(h,i,j,k,l,m)" \
-        "04" "N-R(n,o,p,q,r)" \
-        "05" "S-T(s,t)" \
-        "06" "U-Z(u,v,w,x,y,z)" \
-        "07" "Extra 额外插件" \
-        "00" "Back to the main menu 返回主菜单" \
+        "01" "🍎 A-C(a,b,c)" \
+        "02" "🍇 D-G(d,e,f,g)" \
+        "03" "🥝 H-M(h,i,j,k,l,m)" \
+        "04" "🍑 N-R(n,o,p,q,r)" \
+        "05" "🍓 S-T(s,t)" \
+        "06" "🍉 U-Z(u,v,w,x,y,z)" \
+        "07" "🍊 Extra 额外插件" \
+        "00" "🌚 Back to the main menu 返回主菜单" \
         3>&1 1>&2 2>&3)
     ##############################
     case "${TMOE_OPTION}" in
@@ -81,7 +103,7 @@ tmoe_zsh_plugin_menu_01() {
     TMOE_ZSH_SETTINGS_MODEL='01'
     RETURN_TO_WHERE='tmoe_zsh_plugin_menu_01'
     TMOE_OPTION=$(whiptail --title "list of plugins" --menu "Which plugin do you want to choose?" 0 50 0 \
-        "00" "Return to previous menu 返回上级菜单" \
+        "00" "🌚 Return to previous menu 返回上级菜单" \
         "01" "adb:为adb命令添加自动补全选项" \
         "02" "alias-finder:搜索定义别名,并输出与输入命令匹配的任何别名" \
         "03" "ansible:为[ansible]命令和[aliases]添加了多个别名" \
@@ -207,7 +229,7 @@ tmoe_zsh_plugin_menu_02() {
     TMOE_ZSH_SETTINGS_MODEL='01'
     RETURN_TO_WHERE='tmoe_zsh_plugin_menu_02'
     TMOE_OPTION=$(whiptail --title "list of plugins" --menu "Which plugin do you want to choose?" 0 50 0 \
-        "00" "Return to previous menu 返回上级菜单" \
+        "00" "🌚 Return to previous menu 返回上级菜单" \
         "01" "dash:为[Dash]增强命令行功能" \
         "02" "debian:提供apt和dpkg相关的别名和功能" \
         "03" "dircycle:用于循环浏览目录堆栈" \
@@ -360,7 +382,7 @@ tmoe_zsh_plugin_menu_03() {
     TMOE_ZSH_SETTINGS_MODEL='01'
     RETURN_TO_WHERE='tmoe_zsh_plugin_menu_03'
     TMOE_OPTION=$(whiptail --title "list of plugins" --menu "Which plugin do you want to choose?" 0 50 0 \
-        "00" "Return to previous menu 返回上级菜单" \
+        "00" "🌚 Return to previous menu 返回上级菜单" \
         "01" "hanami:受到了Rails插件的启发,让人感到宾至如归的插件" \
         "02" "helm:可为Kubernetes软件包管理器[Helm]添加补全功能" \
         "03" "heroku:为[Heroku CLI]提供了补全功能" \
@@ -470,7 +492,7 @@ tmoe_zsh_plugin_menu_04() {
     TMOE_ZSH_SETTINGS_MODEL='01'
     RETURN_TO_WHERE='tmoe_zsh_plugin_menu_04'
     TMOE_OPTION=$(whiptail --title "list of plugins" --menu "Which plugin do you want to choose?" 0 50 0 \
-        "00" "Return to previous menu 返回上级菜单" \
+        "00" "🌚 Return to previous menu 返回上级菜单" \
         "01" "n98-magerun:适用于Magento开发人员,系统管理员和开发人员的瑞士军刀" \
         "02" "nanoc:为[Nanoc]命令添加了一些常用别名和自动补全功能" \
         "03" "ng:为[Angular的CLI]添加了自动补全支持" \
@@ -584,7 +606,7 @@ tmoe_zsh_plugin_menu_05() {
     TMOE_ZSH_SETTINGS_MODEL='01'
     RETURN_TO_WHERE='tmoe_zsh_plugin_menu_05'
     TMOE_OPTION=$(whiptail --title "list of plugins" --menu "Which plugin do you want to choose?" 0 50 0 \
-        "00" "Return to previous menu 返回上级菜单" \
+        "00" "🌚 Return to previous menu 返回上级菜单" \
         "01" "safe-paste:在运行之前检查实际粘贴的内容,防止代码在粘贴时运行" \
         "02" "salt:A copy of the completion script from the salt" \
         "03" "sbt:为[sbt,交互式构建工具]添加了补全功能" \
@@ -690,7 +712,7 @@ tmoe_zsh_plugin_menu_06() {
     TMOE_ZSH_SETTINGS_MODEL='01'
     RETURN_TO_WHERE='tmoe_zsh_plugin_menu_06'
     TMOE_OPTION=$(whiptail --title "list of plugins" --menu "Which plugin do you want to choose?" 0 50 0 \
-        "00" "Return to previous menu 返回上级菜单" \
+        "00" "🌚 Return to previous menu 返回上级菜单" \
         "01" "ubuntu:为apt和apt-add-repository等常用命令添加了别名和补全功能" \
         "02" "ufw:简易方便地管理防火墙" \
         "03" "urltools:为URL编码和URL解码字符串提供了两个别名" \
@@ -760,7 +782,49 @@ tmoe_zsh_plugin_menu_06() {
     ${RETURN_TO_WHERE}
 }
 ######################
-case_tmoe_zsh_settings_model() {
+tmoe_zsh_plugin_menu_07() {
+    TMOE_ZSH_SETTINGS_MODEL='04'
+    RETURN_TO_WHERE='tmoe_zsh_plugin_menu_07'
+    TMOE_OPTION=$(whiptail --title "list of plugins" --menu "Which plugin do you want to choose?" 0 50 0 \
+        "00" "🌚 Return to previous menu 返回上级菜单" \
+        "01" "fzf-tab:zsh超强补全插件" \
+        "02" "zsh-syntax-highlighting:语法高亮" \
+        "03" "zsh-autosuggestions:自动补全" \
+        3>&1 1>&2 2>&3)
+    ##############################
+    case "${TMOE_OPTION}" in
+    00 | "") tmoe_zsh_plugin_main_menu ;;
+    01)
+        TMOE_ZSH_GREP_NAME='fzf-tab'
+        ZSH_README_FILE_NAME='README_CN.md'
+        ZSH_README_FILE_NAME_02='README.md lib/zsh-ls-colors/README.md'
+        # TMOE_IMPORTANT_TIPS=$(
+        #    cat <<-EOF
+        #   若本插件加载后${RED}无法${RESET}正常运行，则请前往${GREEN}FAQ${RESET}处重置插件
+        #EOF
+        #       )
+        ;;
+    02)
+        TMOE_ZSH_GREP_NAME='zsh-syntax-highlighting'
+        ZSH_README_FILE_NAME_02='docs/highlighters/*md tests/README.md'
+        ;;
+    03)
+        TMOE_ZSH_GREP_NAME='zsh-autosuggestions'
+        TMOE_IMPORTANT_TIPS=$(
+            cat <<-EOF
+    ${YELLOW}https://github.com/zsh-users/zsh-autosuggestions${RESET}
+EOF
+        )
+        ;;
+    esac
+    ##############################
+    INSTALL_ZSH_PLUGIN="${TMOE_ZSH_GREP_NAME}"
+    case_tmoe_zsh_settings_model
+    press_enter_to_return
+    ${RETURN_TO_WHERE}
+}
+######################
+check_zsh_plugin_folder() {
     TMOE_ZSH_OPTION_01="Readme of ${TMOE_ZSH_GREP_NAME} 说明"
     ZSH_PLUGIN_DIR="${HOME}/.oh-my-zsh/plugins/${TMOE_ZSH_GREP_NAME}"
     CUSTOM_ZSH_PLUGIN_DIR="${HOME}/.oh-my-zsh/custom/plugins/${TMOE_ZSH_GREP_NAME}"
@@ -778,11 +842,15 @@ case_tmoe_zsh_settings_model() {
     if [ -e "${CUSTOM_ZSH_PLUGIN_DIR}" ]; then
         ZSH_PLUGIN_DIR=${CUSTOM_ZSH_PLUGIN_DIR}
     fi
-
+}
+############
+case_tmoe_zsh_settings_model() {
+    check_zsh_plugin_folder
     case "${TMOE_ZSH_SETTINGS_MODEL}" in
     01) tmoe_zsh_settings_model_01 ;;
     02) tmoe_zsh_settings_model_02 ;;
     03) tmoe_zsh_settings_model_03 ;;
+    04) tmoe_zsh_settings_model_04 ;;
     esac
 }
 ######################
@@ -804,6 +872,7 @@ check_tmoe_zsh_config_value() {
 }
 ######################
 enable_zsh_plugin() {
+    check_zsh_plugin_folder
     case "${TMOE_ZSH_CONFIG_ENABLED}" in
     true | yes)
         echo "您${YELLOW}已经启用过${RESETT}本插件了，不要${RED}重复启用${RESET}哦！"
@@ -824,6 +893,7 @@ check_zsh_plugin_content() {
 }
 ##########
 disable_zsh_plugin() {
+    check_zsh_plugin_folder
     case "${TMOE_ZSH_CONFIG_ENABLED}" in
     true) sed -i "${TMOE_ZSH_CONFIG_LINE} d" "${TMOE_ZSH_FILE}" ;;
     yes)
@@ -879,7 +949,7 @@ tmoe_zsh_settings_model_01() {
     check_tmoe_zsh_config_value
     RETURN_TO_MENU='tmoe_zsh_settings_model_01'
     TMOE_OPTION=$(whiptail --title "您想要对${TMOE_ZSH_GREP_NAME}小可爱做什么？" --menu "${TMOE_ZSH_CONFIG_STATUS}" 0 50 0 \
-        "0" "Return to previous menu 返回上级菜单" \
+        "0" "🌚 Return to previous menu 返回上级菜单" \
         "1" "${TMOE_ZSH_OPTION_01}" \
         "2" "Enable 启用" \
         "3" "Disable 禁用" \
@@ -900,7 +970,7 @@ tmoe_zsh_settings_model_02() {
     check_tmoe_zsh_config_value
     RETURN_TO_MENU='tmoe_zsh_settings_model_02'
     TMOE_OPTION=$(whiptail --title "您想要对${TMOE_ZSH_GREP_NAME}小可爱做什么？" --menu "${TMOE_ZSH_CONFIG_STATUS}" 0 50 0 \
-        "0" "Return to previous menu 返回上级菜单" \
+        "0" "🌚 Return to previous menu 返回上级菜单" \
         "1" "${TMOE_ZSH_OPTION_01}" \
         "2" "Enable 启用" \
         "3" "Disable 禁用" \
@@ -942,15 +1012,62 @@ pip_install_autoenv() {
     fi
 }
 #############
+git_pull_origin_master() {
+    git reset --hard origin/master
+    git pull --depth=1 origin master --allow-unrelated-histories
+}
+###########
+git_clone_zsh_plugin() {
+    if [ ! -d "${HOME}/.oh-my-zsh/custom/plugins" ]; then
+        mkdir -p ${HOME}/.oh-my-zsh/custom/plugins
+    fi
+
+    if [ ! -d "${ZSH_PLUGIN_GIT_FOLDER}/.git" ]; then
+        rm -rfv ${ZSH_PLUGIN_GIT_FOLDER}
+        git clone --depth=1 ${ZSH_PLUGIN_GIT_URL_01} "${ZSH_PLUGIN_GIT_FOLDER}" || git clone --depth=1 ${ZSH_PLUGIN_GIT_URL_02} "${ZSH_PLUGIN_GIT_FOLDER}"
+        chmod 755 -R "${ZSH_PLUGIN_GIT_FOLDER}"
+    else
+        cd "${ZSH_PLUGIN_GIT_FOLDER}"
+        git_pull_origin_master
+    fi
+}
+#############
+git_clone_fzf_tab() {
+    ZSH_PLUGIN_GIT_FOLDER="${HOME}/.oh-my-zsh/custom/plugins/fzf-tab"
+    ZSH_PLUGIN_GIT_URL_01='https://gitee.com/mo2/fzf-tab.git'
+    ZSH_PLUGIN_GIT_URL_02='git://github.com/Aloxaf/fzf-tab.git'
+    git_clone_zsh_plugin
+}
+###########
+git_clone_zsh_syntax_highlighting() {
+    ZSH_PLUGIN_GIT_FOLDER="${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    ZSH_PLUGIN_GIT_URL_01='https://gitee.com/mo2/zsh-syntax-highlighting.git'
+    ZSH_PLUGIN_GIT_URL_02='git://github.com/zsh-users/zsh-syntax-highlighting'
+    git_clone_zsh_plugin
+}
+################
+git_clone_zsh_autosuggestions() {
+    ZSH_PLUGIN_GIT_FOLDER="${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    ZSH_PLUGIN_GIT_URL_01='https://gitee.com/mo2/zsh-autosuggestions.git'
+    ZSH_PLUGIN_GIT_URL_02='git://github.com/zsh-users/zsh-autosuggestions'
+    git_clone_zsh_plugin
+}
+##########
 tmoe_zsh_plugin_install_function() {
     case "${INSTALL_ZSH_PLUGIN}" in
     autoenv) pip_install_autoenv ;;
+    fzf-tab) git_clone_fzf_tab ;;
+    zsh-syntax-highlighting) git_clone_zsh_syntax_highlighting ;;
+    zsh-autosuggestions) git_clone_zsh_autosuggestions ;;
     esac
 }
 #############
 tmoe_zsh_plugin_remove_function() {
     case "${INSTALL_ZSH_PLUGIN}" in
     autoenv) pip uninstall autoenv || sudo pip uninstall autoenv || sudo pip3 uninstall autoenv ;;
+    fzf-tab) remove_fzf_tab ;;
+    zsh-syntax-highlighting) remove_zsh_syntax_highlighting ;;
+    zsh-autosuggestions) remove_zsh_autosuggestions ;;
     esac
 }
 #########
@@ -958,7 +1075,7 @@ tmoe_zsh_settings_model_03() {
     check_tmoe_zsh_config_value
     RETURN_TO_MENU='tmoe_zsh_settings_model_03'
     TMOE_OPTION=$(whiptail --title "您想要对${TMOE_ZSH_GREP_NAME}小可爱做什么？" --menu "${TMOE_ZSH_CONFIG_STATUS}" 0 50 0 \
-        "0" "Return to previous menu 返回上级菜单" \
+        "0" "🌚 Return to previous menu 返回上级菜单" \
         "1" "${TMOE_ZSH_OPTION_01}" \
         "2" "Enable 启用" \
         "3" "Disable 禁用" \
@@ -988,6 +1105,58 @@ EOF
     ##############################
     press_enter_to_return
     tmoe_zsh_settings_model_03
+}
+####################
+view_extra_note_of_zsh_plugin() {
+    if [ ! -z "${TMOE_IMPORTANT_TIPS}" ]; then
+        cat <<-EOF
+    ${TMOE_IMPORTANT_TIPS} 
+EOF
+    fi
+
+    if [ ! -z "${ZSH_README_FILE_NAME_02}" ]; then
+        cat_zsh_plugin_readme_02
+    fi
+}
+##############
+tmoe_zsh_settings_model_04() {
+    check_tmoe_zsh_config_value
+    RETURN_TO_MENU='tmoe_zsh_settings_model_04'
+    TMOE_OPTION=$(whiptail --title "您想要对${TMOE_ZSH_GREP_NAME}小可爱做什么？" --menu "${TMOE_ZSH_CONFIG_STATUS}" 0 50 0 \
+        "0" "🌚 Return to previous menu 返回上级菜单" \
+        "1" "${TMOE_ZSH_OPTION_01}" \
+        "2" "Enable 启用" \
+        "3" "Remove & disable 移除并禁用" \
+        "4" "Extra note 额外说明" \
+        3>&1 1>&2 2>&3)
+    ##############################
+    case "${TMOE_OPTION}" in
+    0 | "")
+        INSTALL_ZSH_PLUGIN=''
+        ZSH_README_FILE_NAME='README.md'
+        ZSH_README_FILE_NAME_02=''
+        ${RETURN_TO_WHERE}
+        ;;
+    1) cat_zsh_plugin_readme_01 ;;
+    2)
+        tmoe_zsh_plugin_install_function
+        enable_zsh_plugin
+        ;;
+    3)
+        cat <<-EOF
+        ${RED}rm -rfv${RESET} ${BLUE}${HOME}/.oh-my-zsh/custom/plugins/${TMOE_ZSH_GREP_NAME}${RESET}
+        Do you want to ${RED}disable${RESET} it?
+        您真的要${RED}禁用${RESET}${BLUE}${TMOE_ZSH_GREP_NAME}${RESET}插件么?
+EOF
+        do_you_want_to_continue_02
+        rm -rfv ${HOME}/.oh-my-zsh/custom/plugins/${TMOE_ZSH_GREP_NAME}
+        disable_zsh_plugin
+        ;;
+    4) view_extra_note_of_zsh_plugin ;;
+    esac
+    ##############################
+    press_enter_to_return
+    tmoe_zsh_settings_model_04
 }
 ####################
 ####################
