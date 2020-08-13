@@ -1033,7 +1033,7 @@ git_clone_zsh_plugin() {
 }
 #############
 git_clone_fzf_tab() {
-    if [ $(command -v fzf) ]; then
+    if [ ! $(command -v fzf) ]; then
         apt install -y fzf || sudo apt install fzf || sudo pacman -Syu fzf || sudo dnf install fzf
     fi
 
