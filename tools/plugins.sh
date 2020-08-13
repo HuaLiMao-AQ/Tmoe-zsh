@@ -133,7 +133,7 @@ tmoe_zsh_plugin_menu_01() {
         "27" "cask:Emacs的项目管理工具" \
         "28" "catimg:[posva]提供的catimg脚本,在终端上显示图像" \
         "29" "celery:为[Celery]提供了补全功能" \
-        "30" "chruby:改变当前的Ruby版本以及显示Ruby版本的完成和提示功能。" \
+        "30" "chruby:改变当前的Ruby版本以及提供Ruby的补全和提示功能。" \
         "31" "chucknorris:Chuck Norris fortunes插件,完全适合将其用作为MOTD" \
         "32" "cloudfoundry:为[Cloud Foundry Cli]提供一些简单的别名" \
         "33" "codeclimate:为[codeclimate CLI]添加了自动补全功能" \
