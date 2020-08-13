@@ -506,19 +506,20 @@ tmoe_zsh_faq() {
 }
 ###########
 ItemizedConfiguration() {
+	RETURN_TO_WHERE='ItemizedConfiguration'
 	OPTION=$(whiptail --title "Itemized Configuration" --menu "您想要配置哪个项目?zsh主题全平台通用,Termux配色和字体仅适用Android Termux,xfce4终端配色仅适用于linux。You can use zsh theme on all platforms,but termux colors and fonts are only available for Android." 17 50 5 \
 		"1" "Termux配色 color schemes" \
 		"2" "Termux字体 fonts" \
 		"3" "zsh主题 themes" \
 		"4" "xfce4终端配色 xfce4-terminal color schemes" \
 		"5" "Set zsh as the default(默认) shell" \
+		"6" "edit .zshrc手动编辑配置" \
 		"0" "🌚 Back to the main menu 返回主菜单" \
 		3>&1 1>&2 2>&3)
-	if [ "${OPTION}" == '0' ]; then
-		tmoe_zsh_main_menu
-	fi
-
-	if [ "${OPTION}" == '1' ]; then
+	###########
+	case "${TMOE_OPTION}" in
+	00 | "") tmoe_zsh_main_menu ;;
+	1)
 		if [ "${LINUX_DISTRO}" = "Android" ]; then
 			bash ${HOME}/.termux/colors.sh
 		else
@@ -527,9 +528,8 @@ ItemizedConfiguration() {
 			press_enter_to_return
 			ItemizedConfiguration
 		fi
-	fi
-
-	if [ "${OPTION}" == '2' ]; then
+		;;
+	2)
 		if [ "${LINUX_DISTRO}" = "Android" ]; then
 			bash ${HOME}/.termux/fonts.sh
 		else
@@ -538,19 +538,15 @@ ItemizedConfiguration() {
 			press_enter_to_return
 			ItemizedConfiguration
 		fi
-	fi
-
-	if [ "${OPTION}" == '3' ]; then
-		bash ${HOME}/.termux/themes.sh
-	fi
-	if [ "${OPTION}" == '4' ]; then
-		XFCE4TERMINALCOLOR
-	fi
-
-	if [ "${OPTION}" == '5' ]; then
-		DEFAULTSHELL
-	fi
-	exit
+		;;
+	3) bash ${HOME}/.termux/themes.sh ;;
+	4) XFCE4TERMINALCOLOR ;;
+	5) DEFAULTSHELL ;;
+	6) nano ${HOME}/.zshrc || vim ${HOME}/.zshrc || vi ${HOME}/.zshrc ;;
+	esac
+	##############################
+	press_enter_to_return
+	${RETURN_TO_WHERE}
 }
 ############################
 XFCE4TERMINALCOLOR() {
