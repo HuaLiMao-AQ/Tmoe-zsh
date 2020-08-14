@@ -493,6 +493,10 @@ tmoe_zsh_faq() {
 		ZSH_FOLDER="${HOME}/.oh-my-zsh ${HOME}/.zshrc ${HOME}/.termux-zsh"
 		fix_zsh_folder_permissions
 		echo "若无法修复，则请手动执行${GREEN}compaudit | xargs chmod g-w,o-w${RESET}"
+		if [ "${LINUX_DISTRO}" != "Android" ] && [ ${HOME} != "/root" ]; then
+			echo "您亦可将${HOME}目录的权限修改为${CURRENT_USER_NAME}用户和${CURRENT_USER_GROUP}用户组"
+			echo "${RED}sudo chown -R ${CURRENT_USER_NAME}:${CURRENT_USER_GROUP} ${HOME}${RESET}"
+		fi
 		;;
 	4)
 		echo "请手动执行${GREEN}. ~/.zshrc${RESET}或者是${GREEN}source ${HOME}/.zshrc${RESET}"
