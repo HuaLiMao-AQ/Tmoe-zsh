@@ -451,7 +451,7 @@ tmoe_zsh_main_menu() {
 	cd ${cur}
 	#20 50 7
 	RETURN_TO_WHERE='tmoe_zsh_main_menu'
-	TMOE_OPTION=$(whiptail --title "TMOE-ZSH manager running on Linux.(20200815)" --backtitle "Please select onekey configuration for initial installation." --menu "输zsh-i启动本工具,type zsh-i to start this tool.\nPlease use the enter and arrow keys to operate.\n请使用方向键和回车键进行操作,初次安装请选择初始化安装配置" 0 50 0 \
+	TMOE_OPTION=$(whiptail --title "TMOE-ZSH manager running on Linux.(20200815)" --backtitle "Please select install&configure for initial installation." --menu "输zsh-i启动本工具,type zsh-i to start this tool.\nPlease use the enter and arrow keys to operate.\n请使用方向键和回车键进行操作,初次安装请选择安装与配置" 0 50 0 \
 		"1" "🍭 install&configure 安装与配置" \
 		"2" "🌸 Itemized configuration 分项配置" \
 		"3" "🍀 Plugins 插件管理" \
