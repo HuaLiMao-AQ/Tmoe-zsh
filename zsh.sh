@@ -1076,6 +1076,10 @@ add_zsh_alias() {
 	#grep -q 'alias zshtheme=' "${HOME}/.zshrc" >/dev/null 2>&1 || sed -i "$ a\alias zshtheme='bash ${TERMUX_PATH}/themes.sh'" "${HOME}/.zshrc"
 	sed -i '/alias zshtheme=/d' "${HOME}/.zshrc"
 	sed -i "$ a\alias zshtheme='bash ${TMOE_ZSH_TERMUX_PATH}/themes.sh'" "${HOME}/.zshrc"
+	if [ -e "${HOME}/.profile" ]; then
+		sed -i '/alias zshtheme=/d' "${HOME}/.profile"
+		sed -i "$ a\alias zshtheme='bash ${TMOE_ZSH_TERMUX_PATH}/themes.sh'" "${HOME}/.profile"
+	fi
 	#grep -q 'alias zsh-i=' "${HOME}/.zshrc" >/dev/null 2>&1 || sed -i "$ a\alias zsh-i='bash ${TMOE_ZSH_GIT_PATH}/update.sh'" "${HOME}/.zshrc"
 	#grep -q 'alias zsh-i=' "${HOME}/.bashrc" >/dev/null 2>&1 || sed -i "$ a\alias zsh-i='bash ${TMOE_ZSH_GIT_PATH}/update.sh'" "${HOME}/.bashrc"
 	sed -i '/alias zsh-i=/d' "${HOME}/.zshrc" "${HOME}/.bashrc"
