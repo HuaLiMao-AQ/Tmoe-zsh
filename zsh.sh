@@ -526,7 +526,7 @@ tmoe_zsh_faq() {
 		"2" "fzf-tab插件加载异常" \
 		"3" "Fix permissions修复文件权限" \
 		"4" "Conf does not take effect配置文件未生效" \
-		"5" "exit the readme reader退出文档阅读器" \
+		"5" "quit the readme reader退出文档阅读器" \
 		"0" "🌚 Back to the main menu 返回主菜单" \
 		3>&1 1>&2 2>&3)
 	#############
