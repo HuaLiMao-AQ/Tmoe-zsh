@@ -2,6 +2,7 @@
 ##############################################################
 main() {
     terminal_color
+    tmoe_zsh_plugin_env
     case "$1" in
     *) tmoe_zsh_plugin_main_menu ;;
     esac
@@ -16,6 +17,12 @@ terminal_color() {
     RESET=$(printf '\033[m')
 }
 ###############
+tmoe_zsh_plugin_env() {
+    ZINIT_DIR="${HOME}/.zinit"
+    ZINIT_THEME_DIR="${ZINIT_DIR}/themes/_local"
+    OMZ_DIR="${ZINIT_DIR}/omz"
+}
+#############
 press_enter_to_return() {
     echo "Press ${GREEN}enter${RESET} to ${BLUE}return.${RESET}"
     echo "按${GREEN}回车键${RESET}${BLUE}返回${RESET}"
@@ -796,7 +803,7 @@ tmoe_zsh_plugin_menu_07() {
         "00" "🌚 Return to previous menu 返回上级菜单" \
         "01" "fzf-tab:zsh超强补全插件" \
         "02" "zsh-syntax-highlighting:语法高亮" \
-        "03" "zsh-autosuggestions:自动补全" \
+        "03" "zsh-autosuggestions:自动建议" \
         3>&1 1>&2 2>&3)
     ##############################
     case "${TMOE_OPTION}" in
@@ -833,8 +840,8 @@ EOF
 ######################
 check_zsh_plugin_folder() {
     TMOE_ZSH_OPTION_01="Readme of ${TMOE_ZSH_GREP_NAME} 说明"
-    ZSH_PLUGIN_DIR="${HOME}/.oh-my-zsh/plugins/${TMOE_ZSH_GREP_NAME}"
-    CUSTOM_ZSH_PLUGIN_DIR="${HOME}/.oh-my-zsh/custom/plugins/${TMOE_ZSH_GREP_NAME}"
+    ZSH_PLUGIN_DIR="${OMZ_DIR}/plugins/${TMOE_ZSH_GREP_NAME}"
+    CUSTOM_ZSH_PLUGIN_DIR="${OMZ_DIR}/custom/plugins/${TMOE_ZSH_GREP_NAME}"
 
     if [ -e "${ZSH_PLUGIN_DIR}/${TMOE_ZSH_GREP_NAME}.plugin.zsh" ]; then
         ZSH_PLUGIN_FILE="${ZSH_PLUGIN_DIR}/${TMOE_ZSH_GREP_NAME}.plugin.zsh"
@@ -1025,8 +1032,8 @@ git_pull_origin_master() {
 }
 ###########
 git_clone_zsh_plugin() {
-    if [ ! -d "${HOME}/.oh-my-zsh/custom/plugins" ]; then
-        mkdir -p ${HOME}/.oh-my-zsh/custom/plugins
+    if [ ! -d "${OMZ_DIR}/custom/plugins" ]; then
+        mkdir -p ${OMZ_DIR}/custom/plugins
     fi
 
     if [ ! -d "${ZSH_PLUGIN_GIT_FOLDER}/.git" ]; then
@@ -1048,21 +1055,21 @@ git_clone_fzf_tab() {
         echo "检测到您尚未安装fzf,请手动使用包管理安装。"
     fi
 
-    ZSH_PLUGIN_GIT_FOLDER="${HOME}/.oh-my-zsh/custom/plugins/fzf-tab"
+    ZSH_PLUGIN_GIT_FOLDER="${OMZ_DIR}/custom/plugins/fzf-tab"
     ZSH_PLUGIN_GIT_URL_01='https://gitee.com/mo2/fzf-tab.git'
     ZSH_PLUGIN_GIT_URL_02='git://github.com/Aloxaf/fzf-tab.git'
     git_clone_zsh_plugin
 }
 ###########
 git_clone_zsh_syntax_highlighting() {
-    ZSH_PLUGIN_GIT_FOLDER="${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    ZSH_PLUGIN_GIT_FOLDER="${OMZ_DIR}/custom/plugins/zsh-syntax-highlighting"
     ZSH_PLUGIN_GIT_URL_01='https://gitee.com/mo2/zsh-syntax-highlighting.git'
     ZSH_PLUGIN_GIT_URL_02='git://github.com/zsh-users/zsh-syntax-highlighting'
     git_clone_zsh_plugin
 }
 ################
 git_clone_zsh_autosuggestions() {
-    ZSH_PLUGIN_GIT_FOLDER="${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    ZSH_PLUGIN_GIT_FOLDER="${OMZ_DIR}/custom/plugins/zsh-autosuggestions"
     ZSH_PLUGIN_GIT_URL_01='https://gitee.com/mo2/zsh-autosuggestions.git'
     ZSH_PLUGIN_GIT_URL_02='git://github.com/zsh-users/zsh-autosuggestions'
     git_clone_zsh_plugin
@@ -1159,12 +1166,12 @@ tmoe_zsh_settings_model_04() {
         ;;
     3)
         cat <<-EOF
-        ${RED}rm -rfv${RESET} ${BLUE}${HOME}/.oh-my-zsh/custom/plugins/${TMOE_ZSH_GREP_NAME}${RESET}
+        ${RED}rm -rfv${RESET} ${BLUE}${OMZ_DIR}/custom/plugins/${TMOE_ZSH_GREP_NAME}${RESET}
         Do you want to ${RED}disable${RESET} it?
         您真的要${RED}禁用${RESET}${BLUE}${TMOE_ZSH_GREP_NAME}${RESET}插件么?
 EOF
         do_you_want_to_continue_02
-        rm -rfv ${HOME}/.oh-my-zsh/custom/plugins/${TMOE_ZSH_GREP_NAME}
+        rm -rfv ${OMZ_DIR}/custom/plugins/${TMOE_ZSH_GREP_NAME}
         disable_zsh_plugin
         ;;
     4) view_extra_note_of_zsh_plugin ;;
