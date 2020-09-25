@@ -5,7 +5,7 @@ tmoe_theme_main() {
   tmoe_zsh_theme_env
   CATCAT_COLOR='false'
   case "$1" in
-  -h | help | --help | --get-help-info)
+  h | -h | help | --help | --get-help-info)
     CATCAT_COLOR='true'
     get_tmoe_zsh_theme_help_info
     ;;
@@ -168,7 +168,7 @@ tmoe_theme_main() {
   pi) TMOE_THEME=pi ;;
   pmcgee) TMOE_THEME=pmcgee ;;
   p9k | powerlevel9k) TMOE_THEME=powerlevel9k ;;
-  p10k | powerlevel10k) TMOE_THEME=powerlevel10k ;;
+  p10k | -p10k | powerlevel10k) TMOE_THEME=powerlevel10k ;;
   punctual) TMOE_THEME=punctual ;;
   pygmalion) TMOE_THEME=pygmalion ;;
   pygmalion-virtualenv) TMOE_THEME=pygmalion-virtualenv ;;
@@ -227,6 +227,7 @@ tmoe_theme_main() {
   zeroastro) TMOE_THEME=zeroastro ;;
   zeta) TMOE_THEME=zeta ;;
   zhann) TMOE_THEME=zhann ;;
+  *) echo "Unknown parameter,you can type ${GREEN}zshtheme h${RESET} to get help information.If you find a bug, please submit an issue to the git-repo of ${BLUE}tmoe-zsh${RESET}." ;;
   esac
   case_tmoe_zsh_theme
 }
@@ -237,8 +238,11 @@ case_tmoe_zsh_theme() {
   *)
     TMOE_ZSH_THEME="${TMOE_THEME}"
     temp_zsh_theme_env
-    copy_tmoe_zsh_theme
-    exec zsh
+    case_zsh_theme
+    case "${TMOE_CONTAINER_AUTO_CONFIGURE}" in
+    true) ;;
+    *) exec zsh ;;
+    esac
     ;;
   esac
 }
@@ -291,12 +295,12 @@ get_tmoe_zsh_theme_help_info() {
   For example.01: If you type ${GREEN}zshtheme${RESET} ${BLUE}agnosterzak${RESET},then zsh theme will be changed to ${BLUE}agnosterzak${RESET}.
   02:   ${GREEN}zshtheme${RESET} ${BLUE}xiong-chiamiov-plus${RESET}
   您可以输${GREEN}zshtheme${RESET} ${BLUE}\$主题名称${RESET}来修改主题。
-  例如： 您可以输入${GREEN}zshtheme${RESET} ${BLUE}powerlevel10k${RESET}或者${GREEN}zshtheme${RESET} ${BLUE}p10k${RESET}，将主题修改为${BLUE}powerlevel10k${RESET}。
+  例如： 输入${GREEN}zshtheme${RESET} ${BLUE}powerlevel10k${RESET}或者${GREEN}zshtheme${RESET} ${BLUE}p10k${RESET}，将主题修改为${BLUE}powerlevel10k${RESET}。
   --------------
   ${BOLD}${YELLOW}LIST OF ZSH THEMES${RESET}${RESET}:
 ENDOFTMOEZSHHELP01
   ${CATCAT} <<-'ENDOFTMOEZSHHELP02'
-  3den , abaykan , adben , af-magic , afowler , agnoster , agnosterzak , alanpeabody , amuse , aphrodite , apple , arrow , asciigit , aussiegeek , avit , avit-da2k , awesomepanda , bender , bira , blinks , blokkzh , bullet-train , bunnyruni , bureau , candy , candy-kingdom , chi , chill , classyTouch , clean , cloud , cordial , crcandy , crunch , cypher , dallas , darkblood , daveverwer , dieter , docker , dogenpunk , dpoggi , drofloh , dst , dstufft , ducula , duellj , eastwood , edvardm , elessar , emotty , enlightenment , essembeh , evan , fino , fino-time , fishy , fishy2 , flazz , fletcherm , fox , frisk , frontcube , funky , funkyberlin , fwalch , gallifrey , gallois , garyblessington , gentoo , geoffgarside , gianu , gitster , gnzh , gozilla , half-life , halil , haribo , hedgehog , humza , hyper-oh-my-zsh , hyperzsh , igorsilva , imajes , imp , imperator-root , intheloop , intika , itchy , jaischeema , jbergantine , jispwoso , jnrowe , jonathan , josh , jovial , jreese , jtriley , juanghurtado , junkfood , kafeitu , kardan , kayid , kennethreitz , kimwz , kinda-fishy , kiwi , kmac , kolo , kphoen , lambda , lambda-gitster , lambda-mod , lambda-v , linuxonly , lukerandall , macovsky , maran , maza , McQuen , mgutz , mh , michelebologna , mikeh , miloshadzic , minimal , minimal2 , minimal_improve , mira , mortalscumbag , mrtazz , murilasso , muse , nanotech , nebirhos , nicoulaj , node , nodeys , norm , nox , nt9 , nuts , obraun , odin , ohwonder , oxide , peepcode , philips , philthy , pi , pmcgee , powerlevel9k , powerlevel10k , punctual , pygmalion , pygmalion-virtualenv , rafiki , random , random-emoji , re5et , refined , reggae , rgm , risto , rixius , rkj , rkj-repos , robbyrussell , robbyrussell-WIP , sammy , shayan , simonoff , simple , skaro , sm , smt , sobole , Soliah , sonicradish , sorin , sporty_256 , staples , steeef , strug , sunaku , sunrise , superjarin , suvash , takashiyoshida , terminalparty , theunraveler , tjkirch , tjkirch_mod , tonotdo , traditional-plus , trapd00r , typewritten , vero , via , wedisagree , wezm , wezm+ , windows , wuffers , xiong-chiamiov , xiong-chiamiov-plus , xxf , ys , zeroastro , zeta , zhann
+  3den , abaykan , adben , af-magic , afowler , agnoster , agnosterzak , alanpeabody , amuse , aphrodite , apple , arrow , asciigit , aussiegeek , avit , avit-da2k , awesomepanda , bender , bira , blinks , blokkzh , bullet-train , bunnyruni , bureau , candy , candy-kingdom , chi , chill , classyTouch , clean , cloud , cordial , crcandy , crunch , cypher , dallas , darkblood , daveverwer , dieter , docker , dogenpunk , dpoggi , drofloh , dst , dstufft , ducula , duellj , eastwood , edvardm , elessar , emotty , enlightenment , essembeh , evan , fino , fino-time , fishy , fishy2 , flazz , fletcherm , fox , frisk , frontcube , funky , funkyberlin , fwalch , gallifrey , gallois , garyblessington , gentoo , geoffgarside , gianu , gitster , gnzh , gozilla , half-life , halil , haribo , hedgehog , humza , hyper-oh-my-zsh , hyperzsh , igorsilva , imajes , imp , imperator-root , intheloop , intika , itchy , jaischeema , jbergantine , jispwoso , jnrowe , jonathan , josh , jovial , jreese , jtriley , juanghurtado , junkfood , kafeitu , kardan , kayid , kennethreitz , kimwz , kinda-fishy , kiwi , kmac , kolo , kphoen , lambda , lambda-gitster , lambda-mod , lambda-v , linuxonly , lukerandall , macovsky , maran , maza , McQuen , mgutz , mh , michelebologna , mikeh , miloshadzic , minimal , minimal2 , minimal_improve , mira , mortalscumbag , mrtazz , murilasso , muse , nanotech , nebirhos , nicoulaj , node , nodeys , norm , nox , nt9 , nuts , obraun , odin , ohwonder , oxide , peepcode , philips , philthy , pi , pmcgee , powerlevel10k , punctual , pygmalion , pygmalion-virtualenv , rafiki , random , random-emoji , re5et , refined , reggae , rgm , risto , rixius , rkj , rkj-repos , robbyrussell , robbyrussell-WIP , sammy , shayan , simonoff , simple , skaro , sm , smt , sobole , Soliah , sonicradish , sorin , sporty_256 , staples , steeef , strug , sunaku , sunrise , superjarin , suvash , takashiyoshida , terminalparty , theunraveler , tjkirch , tjkirch_mod , tonotdo , traditional-plus , trapd00r , typewritten , vero , via , wedisagree , wezm , wezm+ , windows , wuffers , xiong-chiamiov , xiong-chiamiov-plus , xxf , ys , zeroastro , zeta , zhann
 ENDOFTMOEZSHHELP02
 }
 ######
@@ -306,7 +310,7 @@ tmoe_zsh_theme_env() {
   ZINIT_THEME_DIR="${ZINIT_DIR}/themes/_local"
   OMZ_DIR="${ZINIT_DIR}/omz"
   OMZ_THEME_DIR="${OMZ_DIR}/themes"
-  TMOE_THEME_DIR="${HOME}/.config/tmoe-zsh/git/.termux/themes"
+  TMOE_THEME_DIR="${HOME}/.config/tmoe-zsh/git/share/themes"
   #ZSH_CUSTOM_THEME_PATH="${OMZ_DIR}/custom/themes"
   ZSHRC_FILE="${HOME}/.zshrc"
   CURRENT_DIR=$(pwd)
@@ -316,10 +320,11 @@ tmoe_zsh_theme_env() {
   P9K_URL_01='https://gitee.com/ak2/powerlevel9k.git'
   P9K_URL_02="git://github.com/Powerlevel9k/powerlevel9k"
   COUNT=0
-  ZINIT_LINE=$(cat ${ZSHRC_FILE} | grep -n 'source.*bin/zinit.zsh' | awk -F ':' '{print $1}')
+  ZINIT_LINE=$(cat ${ZSHRC_FILE} | egrep -n '^[^#]*source.*bin/zinit.zsh' | awk -F ':' '{print $1}' | head -n 1)
   if ! egrep -q '^[^#]*ZINIT_THEME_DIR=.*themes/_local' "${ZSHRC_FILE}"; then
     sed -i "${ZINIT_LINE} i\ZINIT_THEME_DIR=\${HOME}/.zinit/themes/_local" "${ZSHRC_FILE}"
   fi
+  ZINIT_THEME_LINE=$((${ZINIT_LINE} + 3))
 }
 ##########
 temp_zsh_theme_env() {
@@ -337,11 +342,11 @@ del_zsh_theme_line() {
 configure_new_zsh_theme_01() {
   #if ! egrep -q "^[^#]*zinit.*${TMOE_ZSH_THEME}" "${ZSHRC_FILE}"; then; fi
   del_zsh_theme_line
-  sed -i "${ZINIT_LINE} a\zinit light \${ZINIT_THEME_DIR}/${TMOE_ZSH_THEME}" "${ZSHRC_FILE}"
+  sed -i "${ZINIT_THEME_LINE} a\zinit light \${ZINIT_THEME_DIR}/${TMOE_ZSH_THEME}" "${ZSHRC_FILE}"
 }
 ###########
 rm_zsh_git_theme_dir() {
-  rm -rv "${CHOSEN_THEME_DIR}"
+  rm -rv "${CHOSEN_THEME_DIR}" 2>/dev/null
   mkdir -p "${ZINIT_THEME_DIR}"
 }
 ###########
@@ -355,16 +360,28 @@ configure_p9k() {
 }
 ##########
 configure_p10k() {
+  echo "You can type ${GREEN}p10k configure${RESET} to configure ${BLUE}powerlevel 10k${RESET}."
+  echo "输${GREEN}p10k configure${RESET}配置powerlevel 10k${RESET}"
   if [ ! -e "${CHOSEN_THEME_DIR}/.git" ]; then
     rm_zsh_git_theme_dir
-    echo '检测到您选择的是powerlevel 10k主题,若无法弹出配置面板，则请拉宽屏幕显示大小，然后输p10k configure'
-    echo "You can type ${GREEN}p10k configure${RESET} to configure powerlevel 10k."
+    echo "检测到您选择的是powerlevel 10k主题,若无法弹出配置面板，则请拉宽屏幕显示大小，然后输${GREEN}p10k configure${RESET}"
     git clone ${P10K_URL_01} "${CHOSEN_THEME_DIR}" --depth=1 || git clone ${P10K_URL_02} "${CHOSEN_THEME_DIR}" --depth=1
   else
     cd "${CHOSEN_THEME_DIR}"
     git reset --hard
     git pull --depth=1
     cd ${CURRENT_DIR}
+  fi
+  P10K_CONFIG_FILE="${HOME}/.p10k.zsh"
+  if [ ! -e "${P10K_CONFIG_FILE}" ]; then
+    curl -Lo ${P10K_CONFIG_FILE} 'https://gitee.com/ak2/p10k_config/raw/master/.p10k.zsh'
+    chmod a+r ${P10K_CONFIG_FILE}
+  fi
+
+  if ! grep -q '.p10k.zsh' "${HOME}/.zshrc"; then
+    cat >>${HOME}/.zshrc <<-"ENDOFPOWERLEVEL"
+		[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh 
+		ENDOFPOWERLEVEL
   fi
   configure_new_zsh_theme_01
 }
@@ -381,6 +398,15 @@ copy_tmoe_zsh_theme() {
   configure_new_zsh_theme_01
 }
 ###########
+case_zsh_theme() {
+  temp_zsh_theme_env
+  case "${TMOE_ZSH_THEME}" in
+  powerlevel9k) configure_p9k ;;
+  powerlevel10k) configure_p10k ;;
+  *) copy_tmoe_zsh_theme ;;
+  esac
+}
+##########
 choose_zsh_theme() {
   echo -e "The default theme is xiong-chiamiov-plus.\nYou can choose another one from the list below"
   echo "您可以在${BLUE}此列表${RESET}中选择${YELLOW}zsh主题${RESET}。"
@@ -400,11 +426,7 @@ choose_zsh_theme() {
     elif ((${ZSH_THEME_NUMBER} >= 0 && ${ZSH_THEME_NUMBER} <= ${COUNT})); then
       eval TMOE_ZSH_THEME=${ZSH_THEME_NAME[ZSH_THEME_NUMBER]}
       temp_zsh_theme_env
-      case "${TMOE_ZSH_THEME}" in
-      powerlevel9k) configure_p9k ;;
-      powerlevel10k) configure_p10k ;;
-      *) copy_tmoe_zsh_theme ;;
-      esac
+      case_zsh_theme
       ##############
       break
     else
@@ -416,10 +438,11 @@ choose_zsh_theme() {
   Android) chsh -s zsh ;;
   esac
   cat <<-ENDOFTMOEZSHHELP03
-  您可以输${YELLOW}zshtheme${RESET}来更改${BLUE}主题${RESET},输${YELLOW}zshtheme -h${RESET}来获取${BLUE}帮助信息${RESET}。
-  You can type ${GREEN}zshtheme${RESET} to change the ${BLUE}theme${RESET}.
-  You can also type ${GREEN}zshtheme -h${RESET} to get the ${BLUE}help info${RESET}.
+  输${YELLOW}zshtheme h${RESET}来获取${BLUE}zsh主题帮助信息${RESET}。
+  You can type ${GREEN}zshtheme h${RESET} to get the ${BLUE}zsh theme help info${RESET}.
 ENDOFTMOEZSHHELP03
+  #您可以输${YELLOW}zshtheme${RESET}来更改${BLUE}主题${RESET}
+  #You can type ${GREEN}zshtheme${RESET} to change the ${BLUE}theme${RESET}.
   exec zsh
 }
 ##############

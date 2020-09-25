@@ -65,13 +65,21 @@ update_command_not_found() {
     if [ -e "/usr/lib/command-not-found" ]; then
         case "${LINUX_DISTRO}" in
         debian)
-            grep -q 'command-not-found' "${HOME}/.zshrc" 2>/dev/null || sed -i "$ a\source ${OMZ_DIR}/plugins/command-not-found/command-not-found.plugin.zsh" "${HOME}/.zshrc"
-            if ! grep -qi 'Ubuntu' '/etc/os-release'; then
-                apt-file update 2>/dev/null || sudo apt-file update
-                update-command-not-found 2>/dev/null || sudo update-command-not-found 2>/dev/null
-            fi
-            #apt update  2>/dev/null
-            apt upgrade -y zsh git 2>/dev/null || sudo apt upgrade -y zsh git 2>/dev/null
+            case "${DEBIAN_DISTRO}" in
+            ubuntu) ;;
+            *)
+                case $(id -u) in
+                0)
+                    apt-file update 2>/dev/null
+                    update-command-not-found 2>/dev/null
+                    ;;
+                *)
+                    sudo apt-file update
+                    sudo update-command-not-found 2>/dev/null
+                    ;;
+                esac
+                ;;
+            esac
             ;;
         esac
     fi
@@ -79,7 +87,7 @@ update_command_not_found() {
 ##############
 git_pull_powerlevel_10k() {
     POWER_LEVEL_DIR="${ZINIT_THEME_DIR}/powerlevel10k"
-    if [ -d "${POWER_LEVEL_DIR}" ]; then
+    if [ -e "${POWER_LEVEL_DIR}/.git" ]; then
         cd "${POWER_LEVEL_DIR}"
         tmoe_git_pull_origin_master
     fi
@@ -106,19 +114,24 @@ tmoe_git_pull_origin_master() {
 }
 ###########
 git_pull_fast_syntax_highlighting() {
-    cd ${FAST_SYNTAX_HIGH_LIGHTING_PLUGIN_DIR}
-    tmoe_git_pull_origin_master
+    if [ -e "${FAST_SYNTAX_HIGH_LIGHTING_PLUGIN_DIR}/.git" ]; then
+        cd ${FAST_SYNTAX_HIGH_LIGHTING_PLUGIN_DIR}
+        tmoe_git_pull_origin_master
+    fi
 }
 ###########
 git_pull_zsh_autosuggestions() {
-    cd ${ZSH_AUTO_SUGGESTIONS_PLUGIN_DIR}
-    tmoe_git_pull_origin_master
+    if [ -e "${ZSH_AUTO_SUGGESTIONS_PLUGIN_DIR}/.git" ]; then
+        cd ${ZSH_AUTO_SUGGESTIONS_PLUGIN_DIR}
+        tmoe_git_pull_origin_master
+    fi
 }
 #############
 git_pull_oh_my_zsh() {
     cd ${OMZ_DIR}
     git reset --hard origin/master
-    git pull --depth=1 origin master --allow-unrelated-histories || echo "若oh-my-zsh更新失败，则请手动输${BLUE}zsh ${OMZ_DIR}/tools/upgrade.sh${RESET}" && zsh "${OMZ_DIR}/tools/upgrade.sh"
+    git pull --depth=1 origin master --allow-unrelated-histories
+    #echo "若oh-my-zsh更新失败，则请手动输${BLUE}zsh ${OMZ_DIR}/tools/upgrade.sh${RESET}" && zsh "${OMZ_DIR}/tools/upgrade.sh"
 }
 ###########
 upgrade_zsh_plugins_main "$@"

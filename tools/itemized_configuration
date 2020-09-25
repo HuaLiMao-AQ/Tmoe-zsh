@@ -1,45 +1,63 @@
 #!/usr/bin/env bash
 ##################
+change_the_terminal_color_scheme() {
+    case "${LINUX_DISTRO}" in
+    Android) bash ${TMOE_ZSH_TERMUX_PATH}/colors.sh ;;
+    *)
+        echo '非常抱歉，此功能只支持安卓'
+        echo "Sorry, this feature only supports Android"
+        press_enter_to_return
+        zsh_itemized_configuration_menu
+        ;;
+    esac
+}
+###############
+change_the_terminal_font() {
+    case "${LINUX_DISTRO}" in
+    Android) bash ${TMOE_ZSH_TERMUX_PATH}/fonts.sh ;;
+    *)
+        echo '非常抱歉，此功能只支持安卓'
+        echo "Sorry, this feature only supports Android"
+        press_enter_to_return
+        zsh_itemized_configuration_menu
+        ;;
+    esac
+}
+################
+edit_zshrc_manually() {
+    if [ $(command -v editor) ]; then
+        editor ${HOME}/.zshrc
+    elif [ $(command -v vim) ]; then
+        vim ${HOME}/.zshrc
+    elif [ $(command -v nano) ]; then
+        nano ${HOME}/.zshrc
+    else
+        vi ${HOME}/.zshrc
+    fi
+}
+###########
 zsh_itemized_configuration_menu() {
     RETURN_TO_WHERE='zsh_itemized_configuration_menu'
-    TMOE_OPTION=$(whiptail --title "Itemized Configuration" --menu "您想要配置哪个项目?zsh主题全平台通用,Termux配色和字体仅适用Android Termux,xfce4终端配色仅适用于linux。You can use zsh theme on all platforms,but termux colors and fonts are only available for Android." 17 50 5 \
-        "1" "Termux配色 color schemes" \
-        "2" "Termux字体 fonts" \
-        "3" "zsh主题 themes" \
-        "4" "xfce4终端配色 xfce4-terminal color schemes" \
-        "5" "Set zsh as the default(默认) shell" \
-        "6" "edit .zshrc手动编辑配置" \
+    #17 50 5
+    #zsh主题全平台通用,Termux配色和字体仅适用Android Termux,xfce4终端配色仅适用于linux。You can use zsh theme on all platforms,but termux colors and fonts are only available for Android.
+    TMOE_OPTION=$(whiptail --title "Itemized Configuration" --menu "您想要配置哪个项目?\nWhich configuration do you want to modify?" 0 0 0 \
+        "1" "edit .zshrc手动编辑配置" \
+        "2" "zsh主题 themes" \
+        "3" "Termux配色 color schemes" \
+        "4" "Termux字体 fonts" \
+        "5" "xfce4终端配色 xfce4-terminal color schemes" \
+        "6" "Set zsh as the default(默认) shell" \
         "0" "🌚 Back to the main menu 返回主菜单" \
         3>&1 1>&2 2>&3)
     ###########
     case "${TMOE_OPTION}" in
     0 | "") tmoe_zsh_main_menu ;;
-    1)
-        case "${LINUX_DISTRO}" in
-        Android) bash ${TMOE_ZSH_TERMUX_PATH}/colors.sh ;;
-        *)
-            echo '非常抱歉，此功能只支持安卓'
-            echo "Sorry, this feature only supports Android"
-            press_enter_to_return
-            zsh_itemized_configuration_menu
-            ;;
-        esac
-        ;;
-    2)
-        case "${LINUX_DISTRO}" in
-        Android) bash ${TMOE_ZSH_TERMUX_PATH}/fonts.sh ;;
-        *)
-            echo '非常抱歉，此功能只支持安卓'
-            echo "Sorry, this feature only supports Android"
-            press_enter_to_return
-            zsh_itemized_configuration_menu
-            ;;
-        esac
-        ;;
-    3) bash ${TMOE_ZSH_TERMUX_PATH}/themes.sh ;;
-    4) configure_xfce_terminal_color ;;
-    5) configure_default_shell ;;
-    6) nano ${HOME}/.zshrc || vim ${HOME}/.zshrc || vi ${HOME}/.zshrc ;;
+    1) edit_zshrc_manually ;;
+    2) bash ${TMOE_ZSH_TERMUX_PATH}/themes.sh ;;
+    3) change_the_terminal_color_scheme ;;
+    4) change_the_terminal_font ;;
+    5) configure_xfce_terminal_color ;;
+    6) configure_default_shell ;;
     esac
     ##############################
     press_enter_to_return

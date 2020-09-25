@@ -11,8 +11,8 @@ tmoe_zsh_main_env() {
 }
 ##############
 check_current_user_name_and_group() {
-    CURRENT_USER_NAME=$(cat /etc/passwd | grep "${HOME}" | awk -F ':' '{print $1}')
-    CURRENT_USER_GROUP=$(cat /etc/passwd | grep "${HOME}" | awk -F ':' '{print $5}' | cut -d ',' -f 1)
+    CURRENT_USER_NAME=$(cat /etc/passwd | grep "${HOME}" | awk -F ':' '{print $1}' | head -n 1)
+    CURRENT_USER_GROUP=$(cat /etc/passwd | grep "${HOME}" | awk -F ':' '{print $5}' | cut -d ',' -f 1 | head -n 1)
     if [ -z "${CURRENT_USER_GROUP}" ]; then
         CURRENT_USER_GROUP=${CURRENT_USER_NAME}
     fi
@@ -52,8 +52,15 @@ check_architecture() {
 }
 #################
 neko_01() {
+    if [ -e /usr/games/lolcat ]; then
+        CATCAT='/usr/games/lolcat'
+    elif [ $(command -v lolcat) ]; then
+        CATCAT='lolcat'
+    else
+        CATCAT='cat'
+    fi
     printf "$BLUE"
-    cat <<-'EndOFneko'
+    ${CATCAT} <<-'EndOFneko'
 		               .::::..                
 		    ::::rrr7QQJi::i:iirijQBBBQB.      
 		    BBQBBBQBP. ......:::..1BBBB       
@@ -110,7 +117,7 @@ unxz_fzf_deb_bin() {
 install_debian_fzf_bin() {
     if [ ! $(command -v fzf) ]; then
         if [ $(command -v zsh) ]; then
-            echo '' >${TMOE_ZSH_DIR}/non_fzf
+            echo '' >${TMOE_ZSH_DIR}/non_install_fzf
         fi
         case "${LINUX_DISTRO}" in
         debian)
@@ -160,15 +167,27 @@ install_batcat_gitee_bin() {
             cd /tmp
             git clone --depth=1 -b ${BRANCH_NAME} ${BAT_BIN_GIT_REPO} ${BAT_CAT_BIN_TEMP_FOLDER}
             tar -Jxvf ${BAT_CAT_BIN_TEMP_FOLDER}/bat.tar.xz -C /usr/local/bin
-            rm -rfv ${BAT_CAT_BIN_TEMP_FOLDER}
+            rm -rfv ${BAT_CAT_BIN_TEMP_FOLDER} 2>/dev/null
             ;;
         esac
     fi
 }
 ############
 check_gnu_linux_dependencies() {
+    check_gnu_linux_dependencies_01
+    install_gnu_linux_dependencies
+    DEPENDENCIES_02=''
+    check_gnu_linux_dependencies_02
+    install_gnu_linux_dependencies
+    check_gnu_linux_dependencies_03
+    install_gnu_linux_dependencies
+    install_debian_fzf_bin
+    install_batcat_gitee_bin
+}
+########
+check_gnu_linux_dependencies_01() {
     DEPENDENCIES=""
-
+    DEPENDENCIES_02='command-not-found zsh git pv wget xz-utils tar whiptail'
     case "${LINUX_DISTRO}" in
     debian)
         #apt-file为command-not-found的依赖
@@ -190,13 +209,6 @@ check_gnu_linux_dependencies() {
         esac
     fi
 
-    if [ ! $(command -v batcat) ] && [ ! $(command -v bat) ]; then
-        #gentoo:sys-apps/bat
-        case "${LINUX_DISTRO}" in
-        arch | debian | bat) DEPENDENCIES="${DEPENDENCIES} bat" ;;
-        esac
-    fi
-
     if [ ! $(command -v cmp) ]; then
         case "${LINUX_DISTRO}" in
         arch) DEPENDENCIES="${DEPENDENCIES} diffutils" ;;
@@ -209,30 +221,6 @@ check_gnu_linux_dependencies() {
         esac
     fi
     ###########################################
-    if [ ! $(command -v exa) ]; then
-        case "${LINUX_DISTRO}" in
-        gentoo) DEPENDENCIES="${DEPENDENCIES} sys-apps/exa" ;;
-        alpine | arch | debian | suse) DEPENDENCIES="${DEPENDENCIES} exa" ;;
-        redhat)
-            case "${REDHAT_DISTRO}" in
-            fedora) DEPENDENCIES="${DEPENDENCIES} exa" ;;
-            esac
-            ;;
-        esac
-    fi
-
-    if [ ! $(command -v fzf) ]; then
-        #gentoo) DEPENDENCIES="${DEPENDENCIES} app-shells/fzf" ;; #Masked
-        case "${LINUX_DISTRO}" in
-        alpine | arch | debian | fzf) DEPENDENCIES="${DEPENDENCIES} fzf" ;;
-        redhat)
-            case "${REDHAT_DISTRO}" in
-            fedora) DEPENDENCIES="${DEPENDENCIES} fzf" ;;
-            esac
-            ;;
-        esac
-    fi
-    ####################################
     if [ ! $(command -v pv) ]; then
         case "${LINUX_DISTRO}" in
         gentoo) DEPENDENCIES="${DEPENDENCIES} sys-apps/pv" ;;
@@ -287,15 +275,17 @@ install_gnu_linux_dependencies() {
     #bat exa fzf爲可選依賴
     #apk add -q xz newt tar zsh git wget bash zsh-vcs pv
     #dnf install -y zsh git pv wget xz tar newt
-    if [ ! -z "${DEPENDENCIES}" ] && [ ! -e ${TMOE_ZSH_DIR}/non_fzf ]; then
+    if [ ! -z "${DEPENDENCIES}" ]; then
         echo "正在${YELLOW}安装${RESET}相关${GREEN}软件包${RESET}及其${BLUE}依赖...${RESET}"
         echo "${GREEN}${TMOE_INSTALLATON_COMMAND}${BLUE}${DEPENDENCIES}${RESET}"
         echo "如需${BOLD}${RED}卸载${RESET}${RESET}，请${YELLOW}手动${RESET}输${RED}${TMOE_REMOVAL_COMMAND}${RESET}${BLUE}${DEPENDENCIES}${RESET}"
 
         case "${LINUX_DISTRO}" in
         debian)
-            DEPENDENCIES_02='command-not-found zsh git pv wget xz-utils tar whiptail'
-            install_dependencies_02
+            case ${DEPENDENCIES_02} in
+            "") install_dependencies_01 ;;
+            *) install_dependencies_02 ;;
+            esac
             ;;
         alpine)
             apk_update_source_index
@@ -315,13 +305,59 @@ install_gnu_linux_dependencies() {
             ;;
         esac
     fi
-    if [ $(command -v chsh) ]; then
-        chsh -s $(command -v zsh) || sudo chsh -s $(command -v zsh)
-    fi
-    install_debian_fzf_bin
-    install_batcat_gitee_bin
 }
 #######################
+check_gnu_linux_dependencies_02() {
+    DEPENDENCIES=""
+    if [ ! $(command -v batcat) ] && [ ! $(command -v bat) ]; then
+        #gentoo:sys-apps/bat
+        case "${LINUX_DISTRO}" in
+        arch | debian) DEPENDENCIES="${DEPENDENCIES} bat" ;;
+        esac
+    fi
+
+    if [ ! $(command -v fzf) ] && [ ! -e ${TMOE_ZSH_DIR}/non_install_fzf ]; then
+        #gentoo) DEPENDENCIES="${DEPENDENCIES} app-shells/fzf" ;; #Masked
+        case "${LINUX_DISTRO}" in
+        alpine | arch | debian | suse) DEPENDENCIES="${DEPENDENCIES} fzf" ;;
+        redhat)
+            case "${REDHAT_DISTRO}" in
+            fedora) DEPENDENCIES="${DEPENDENCIES} fzf" ;;
+            esac
+            ;;
+        esac
+    fi
+}
+################
+check_gnu_linux_dependencies_03() {
+    DEPENDENCIES=""
+    if [ ! $(command -v exa) ] && [ ! -e ${TMOE_ZSH_DIR}/non_install_exa ]; then
+        case "${LINUX_DISTRO}" in
+        gentoo) DEPENDENCIES="${DEPENDENCIES} sys-apps/exa" ;;
+        alpine | arch | debian | suse) DEPENDENCIES="${DEPENDENCIES} exa" ;;
+        redhat)
+            case "${REDHAT_DISTRO}" in
+            fedora) DEPENDENCIES="${DEPENDENCIES} exa" ;;
+            esac
+            ;;
+        esac
+    fi
+    if [ ! $(command -v lolcat) ] && [ ! -e /usr/games/lolcat ]; then
+        case "${LINUX_DISTRO}" in
+        arch | debian) DEPENDENCIES="${DEPENDENCIES} lolcat" ;;
+        redhat)
+            case "${REDHAT_DISTRO}" in
+            fedora) DEPENDENCIES="${DEPENDENCIES} lolcat" ;;
+            esac
+            ;;
+        esac
+    fi
+
+    if [ $(command -v zsh) ] && [ ! $(command -v exa) ]; then
+        echo '' >${TMOE_ZSH_DIR}/non_install_exa
+    fi
+}
+##############
 check_termux_dependencies() {
     TMOE_UPDATE_COMMAND='apt update'
     TMOE_INSTALLATON_COMMAND='apt install -y'
@@ -354,6 +390,7 @@ check_termux_dependencies() {
 }
 ####################
 fix_zsh_folder_permissions() {
+    echo "检测到${ZSH_PATH}文件权限所属非当前用户（${CURRENT_USER_NAME}）"
     chmod 755 -R ${ZSH_PATH}
     if [ "${LINUX_DISTRO}" != "Android" ] && [ ${HOME} != "/root" ]; then
         echo "正在将${ZSH_PATH}的权限修改为${CURRENT_USER_NAME}用户和${CURRENT_USER_GROUP}用户组"

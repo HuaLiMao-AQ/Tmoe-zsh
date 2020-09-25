@@ -4,7 +4,7 @@ zinit_uninstallation_menu() {
     RETURN_TO_WHERE='zinit_uninstallation_menu'
     TMOE_OPTION=$(whiptail --title "REMOVE ZSH" --menu "您想要移除哪个项目？\nWhich item do you want to remove?" 0 50 0 \
         "0" "🌚 Back to the main menu 返回主菜单" \
-        "1" "oh-my-zsh" \
+        "1" "zinit and omz" \
         "2" "fonts 字体" \
         "3" "tmoe-zsh 工具" \
         "4" "zsh and git " \
@@ -14,7 +14,7 @@ zinit_uninstallation_menu() {
     ##############################
     case "${TMOE_OPTION}" in
     0 | "") tmoe_zsh_main_menu ;;
-    1) remove_oh_my_zsh ;;
+    1) remove_zinit ;;
     2) remove_termux_fonts ;;
     3) remove_tmoe_zsh ;;
     4) remove_git_and_zsh ;;
@@ -26,24 +26,24 @@ zinit_uninstallation_menu() {
     zinit_uninstallation_menu
 }
 #################################
-
-remove_oh_my_zsh() {
-    echo "uninstall_oh_my_zsh 2>/dev/null || rm -rf ${OMZ_DIR}"
+remove_zinit() {
+    #echo "uninstall_oh_my_zsh 2>/dev/null || rm -rfv ${OMZ_DIR}"
+    echo "${RED}rm -rv${RESET} ${BLUE}${ZINIT_DIR}${RESET}"
     do_you_want_to_continue
-    uninstall_oh_my_zsh 2>/dev/null || rm -rf ${OMZ_DIR}
+    rm -rv ${ZINIT_DIR}
 }
 #########
 remove_termux_fonts() {
-    echo "rm -rf ${TERMUX_PATH}/fonts"
+    echo "rm -rfv ${TERMUX_PATH}/fonts ${TERMUX_PATH}/font.ttf ${TMOE_ZSH_FONTS_PATH}"
     do_you_want_to_continue
-    rm -rfv ${TERMUX_PATH}/fonts
+    rm -rfv ${TERMUX_PATH}/fonts ${TMOE_ZSH_FONTS_PATH} ${TERMUX_PATH}/font.ttf 2>/dev/null
 }
 #########
 remove_tmoe_zsh() {
     echo "${RED}rm -rf ${TMOE_ZSH_DIR} ${PREFIX}/bin/zsh-i ; sed -i '/alias zshtheme=/d' ${HOME}/.zshrc ${HOME}/.profile${RESET}"
     do_you_want_to_continue
     rm -rfv ${TMOE_ZSH_DIR} ${PREFIX}/bin/zsh-i
-    sed -i '/alias zshtheme=/d' "${HOME}/.zshrc" "${HOME}/.profile"
+    sed -i '/alias zshtheme=/d' "${HOME}/.zshrc" "${HOME}/.profile" 2>/dev/null
     sed -i '/alias zshfont=/d' "${HOME}/.zshrc"
     sed -i '/alias zshcolor=/d' "${HOME}/.zshrc"
     echo "${YELLOW}删除完成，按回车键退出 Press Enter to exit.${RESET} "
@@ -52,7 +52,7 @@ remove_tmoe_zsh() {
 }
 ###########
 remove_git_and_zsh() {
-    DEPENDENCIES='git zsh whiptail newt xz dialog'
+    DEPENDENCIES='git zsh whiptail newt xz dialog exa bat fzf'
     echo "${RED}${TMOE_REMOVAL_COMMAND} ${DEPENDENCIES}${RESET}"
     do_you_want_to_continue
     ${TMOE_REMOVAL_COMMAND} ${DEPENDENCIES} 2>/dev/null || sudo ${TMOE_REMOVAL_COMMAND} ${DEPENDENCIES}
@@ -64,19 +64,21 @@ remove_old_zsh_files() {
     cat <<-EOF
 		以下文件夹将被删除，是否确认？
 		ls -lAh ${HOME}/.zsh-syntax-highlighting
+        ls -lAh ${HOME}/.oh-my-zsh
 		ls -lAh ${HOME}/termux-ohmyzsh
 		ls -lh ${HOME}/theme
 	EOF
+    echo "rm -rv ${HOME}/.zsh-syntax-highlighting ${HOME}/termux-ohmyzsh ${HOME}/theme ${HOME}/.oh-my-zsh"
     do_you_want_to_continue
-    rm -rf ${HOME}/.zsh-syntax-highlighting ${HOME}/termux-ohmyzsh ${HOME}/theme
+    rm -rv ${HOME}/.zsh-syntax-highlighting ${HOME}/termux-ohmyzsh ${HOME}/theme ${HOME}/.oh-my-zsh
 }
 ###########
 remove_zshrc() {
     cat ${HOME}/.zshrc
     ls -lh ${HOME}/.zshrc
     do_you_want_to_continue
-    rm -f ${HOME}/.zshrc
-    echo "${YELLOW}删除完成，建议您返回主菜单使用一键配置，按回车键返回 Press Enter to return.${RESET} "
+    rm -vf ${HOME}/.zshrc
+    echo "${YELLOW}删除完成，建议您返回主菜单选择安装与配置Installation and configuration.${RESET} "
 }
 ###########
 zinit_uninstallation_menu
