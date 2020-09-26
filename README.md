@@ -301,7 +301,7 @@ You can type zsh-i to start tmoe-zsh tool.
 
 作为一款插件管理器，本工具的亮点是自动添加注释内容。
 
-以下是`bat ~/.zshrc`的部分内容的截图
+以下是`bat ~/.zshrc`输出的部分内容的截图
 ![bat ~/.zshrc](https://images.gitee.com/uploads/images/2020/0926/110553_bcc3c060_7793225.png "截图_2020-09-26_11-05-33.png")
 因为本工具基于 zinit，所以加载命令都是用 zinit 。  
 类似于如下格式
