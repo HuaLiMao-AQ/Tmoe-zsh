@@ -37,8 +37,9 @@ skip_global_compinit=1
 load_zinit_compinit_function
 ##############
 ALOXAF_FZF_TAB_EXTRA=01
+#当变量ALOXAF_FZF_TAB_EXTRA的值为01时，仅加载补全项颜色函数;为02时，加载右侧窗口配置;为true时，启用所有额外函数;为false时，禁用。
 #: <<\EOF
-#补全项颜色
+#分组和补全项颜色
 aloxaf_fzf_tab_extra_opts_01() {
     zstyle ':completion:*:descriptions' format '[%d]'
     zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
