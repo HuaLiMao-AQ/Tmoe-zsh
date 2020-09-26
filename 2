@@ -15,7 +15,7 @@ tmoe_zsh_02_main() {
 		curl_tmoe_zsh_script_file
 		;;
 	*)
-		check_local_git_dir
+		curl_tmoe_zsh_script_file
 		;;
 	esac
 }
@@ -28,7 +28,7 @@ tmoe_zsh_02_env() {
 }
 ###############
 check_local_git_dir() {
-	if [ -e "${TMOE_ZSH_GIT_DIR}/.git" ] && [ -e ${TMOE_ZSH_GIT_DIR}/zsh.sh ]; then
+	if [ -e "${TMOE_ZSH_GIT_DIR}/.git" ] && [ -s ${TMOE_ZSH_GIT_DIR}/zsh.sh ]; then
 		bash ${TMOE_ZSH_GIT_DIR}/zsh.sh
 	else
 		curl_tmoe_zsh_script_file
