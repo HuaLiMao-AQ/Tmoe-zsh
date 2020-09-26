@@ -53,7 +53,7 @@
 ZSHRC_FILE="${HOME}/.zshrc"
 TMOE_ZSH_GIT_DIR="${HOME}/.config/tmoe-zsh/git"
 rm -rv "${TMOE_ZSH_GIT_DIR}" "$(command -v zsh-i)"
-mv "${ZSHRC_FILE}" "${ZSHRC_FILE}-$(date +%Y%m%d).bak"
+mv "${ZSHRC_FILE}" "${ZSHRC_FILE}_$(date +%Y%m%d).bak"
 ```
 
 ## 2.安装说明
@@ -88,7 +88,7 @@ mv "${ZSHRC_FILE}" "${ZSHRC_FILE}-$(date +%Y%m%d).bak"
     bash -c "$(curl -L gitee.com/mo2/zsh/raw/2/2)"
 ```
 
-5.OpenWRT/Entware(只测试了 mipsel 架构路由器的 Entware 系统)
+5.~~OpenWRT/Entware~~(只测试了 mipsel 架构路由器的 Entware 系统)
 
 > 202009 不再对路由器提供支持，请自行解决依赖关系。
 
