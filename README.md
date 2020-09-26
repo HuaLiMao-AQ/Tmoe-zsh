@@ -4,7 +4,7 @@
 . <(curl -L gitee.com/mo2/zsh/raw/2/2)
 ```
 
-> 方便轻松地为 GNU/Linux 和 Android-Termux 配置 zsh 主题和插件。  
+> 为 GNU/Linux 和 Android-Termux 配置数百个 zsh 主题和插件。  
 > **Easily configure zsh themes for GNU/Linux and Android-Termux**
 
 ## 预览 Preview
@@ -46,6 +46,16 @@
 2020-08-13 更新内容：  
 支持管理约 283 款插件。
 
+2020-09：基本上重写了一遍，由于更新幅度过大，故不兼容旧版。  
+您可以执行以下命令，删除旧版
+
+```shell
+ZSHRC_FILE="${HOME}/.zshrc"
+TMOE_ZSH_GIT_DIR="${HOME}/.config/tmoe-zsh/git"
+rm -rv "${TMOE_ZSH_GIT_DIR}" "$(command -v zsh-i)"
+mv "${ZSHRC_FILE}" "${ZSHRC_FILE}-$(date +%Y%m%d).bak"
+```
+
 ## 2.安装说明
 
 ### 2-1.使用脚本安装
@@ -56,7 +66,7 @@
     . <(curl -L gitee.com/mo2/zsh/raw/2/2)
 ```
 
-2.Debian/Ubuntu/Mint/Kali/Deepin/Devuan/MX 等 deb 系发行版
+2.Debian/Ubuntu/Mint/Kali
 
 ```bash
     sudo apt update
@@ -110,8 +120,15 @@
     bash -c "$(wget -qO- gitee.com/mo2/zsh/raw/2/2)"
 ```
 
-9.其它 system 未测试,以下系统请自行解决依赖关系。  
-例如:**OpenSuse**和**GuixSD**等发行版。  
+9.OpenSUSE
+
+```bash
+    sudo zypper in curl
+    bash -c "$(curl -L gitee.com/mo2/zsh/raw/2/2)"
+```
+
+10.其它 system 未测试,以下系统请自行解决依赖关系。  
+例如:**GuixSD**等发行版。  
 还有 Unix 系统，例如：**MacOS、FreeBSD、OpenBSD、NetBSD**和**SunOS**等。  
 相关依赖为 `zsh git pv wget tar xz newt(whiptail)`
 
@@ -124,6 +141,8 @@ mkdir -p ${TMOE_ZSH_DIR}
 git clone --depth=1 https://gitee.com/mo2/zsh "${TMOE_ZSH_GIT_DIR}"
 bash ${TMOE_ZSH_GIT_DIR}/zsh.sh
 ```
+
+使用`-h`或者`--help`参数获取帮助信息。
 
 ## 3. INSTRUCTIONS 使用说明
 
@@ -284,7 +303,7 @@ You can type zsh-i to start tmoe-zsh tool.
 
 以下是`bat ~/.zshrc`的部分内容的截图
 ![bat ~/.zshrc](https://images.gitee.com/uploads/images/2020/0926/110553_bcc3c060_7793225.png "截图_2020-09-26_11-05-33.png")
-因为本工具基于 zinit，所以自动生成的加载命令都是用 zinit 。  
+因为本工具基于 zinit，所以加载命令都是用 zinit 。  
 类似于如下格式
 
 ```bash
