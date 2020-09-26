@@ -243,7 +243,7 @@ ________       ___      ________       ___      __________
     /  /_/__     \ \  \    \ \  \ \  \    \ \  \       \ \  \
    |\________\    \ \__\    \ \__\ \__\    \ \__\       \ \__\
     \|_______|     \|__|     \|__| \|__|     \|__|        \|__|
-您在安装完成后，可以输 zsh-i进入zsh插件管理工具。
+您可以在安装完成后，输 zsh-i进入zsh插件管理工具。
 插件的加载方式基于zinit。
 You can type zsh-i to start tmoe-zsh tool.
     ------------
@@ -317,7 +317,7 @@ zinit ice wait lucid pick"fast-syntax-highlighting.plugin.zsh" atinit"ZINIT[COMP
 **[Aloxaf/fzf-tab](https://github.com/Aloxaf/fzf-tab)**  
 **[zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)**  
 **[oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)**  
-**[Cabbagec/termux-ohmyzsh](https://github.com/Cabbagec/termux-ohmyzsh)**
+**[Cabbagec/termux-ohmyzsh](https://github.com/Cabbagec/termux-ohmyzsh)**  
 **[zdharma/fast-syntax-highlighting](https://github.com/zdharma/fast-syntax-highlighting)**
 
 zsh 里面的额外主题是我从[oh-my-zsh/external-themes](https://github.com/ohmyzsh/ohmyzsh/wiki/External-themes)里介绍的 Github 仓库里一个个下载下来的，不保证全都能用。  
