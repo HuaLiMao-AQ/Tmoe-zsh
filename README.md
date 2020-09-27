@@ -187,6 +187,19 @@ bash ${TMOE_ZSH_GIT_DIR}/zsh.sh
   序号列表模式。若参数为空，则将进入此模式。
   此模式为交互式操作，您可以先输zshtheme启动,接着输入数字序号。
   --------------
+    部分主题需要联网下载。
+    Some themes need to be downloaded.
+    The following themes use git to clone their repo:
+    以下主题使用git克隆整个仓库：
+    powerlevel10k | pure | via | aphrodite | typewritten | abaykan | agkozak | agnosterzak | alien | alien-minimal | antsy | asciigit | avit-da2k | bender | blokkzh | bullet-train | bunnyruni | chi | chill | ciacho | classytouch | color-input | color-input-line | cordial | daivasmara | docker-zsh | drofloh | ducula | elessar | enlightenment | fishbone++ | fishy2 | funkyberlin | geometry | gitstatus | halil | haribo | hyper-oh-my-zsh | hyperzsh | igeek | igorsilva | imp | jovial | kimwz | kinda-fishy | lambda-mod | lambda-v | matte-black-yellow | matte-black-yellow-line | maza | minimal-improved | minimal2 | node | nodeys | nothing | nt9 | nuts | odin | omega | oxide | pi | punctual | rafiki-zsh  | robbyrussell-wip | shayan | short | sm | sobole | spaceship-zsh | staples | theta | traditional-plus | vero | windows-cmd | zeroastro | zeta | zsh2000 | λpure
+
+  以下主题使用了CDN进行下载加速：
+  The following themes use jsdelivr CDN for download acceleration：
+  color-input | color-input-line | dpoggi-newline-timestamp | gitster | imperator | intika | kayid | kmac | matte-black-yellow | matte-black-yellow-line | minimal2 | oh-wonder | passion | philthy | retro-term | short
+
+  以下主题托管于github gist,下载无加速：
+  xxf | solus | schminitz | reggae | random-emoji | philthy | oh-wonder | hedgehog | hub | mcquen
+  --------------
   NOTES of manual mode
   手动模式的说明
   You can type zshtheme $THEME_NAME to change the zsh theme.
@@ -196,7 +209,7 @@ bash ${TMOE_ZSH_GIT_DIR}/zsh.sh
   例如： 输入zshtheme powerlevel10k或者zshtheme p10k，将主题修改为powerlevel10k。
   --------------
   LIST OF ZSH THEMES:
-  3den , abaykan , adben , af-magic , afowler , agnoster , agnosterzak , alanpeabody , amuse , aphrodite , apple , arrow , asciigit , aussiegeek , avit , avit-da2k , awesomepanda , bender , bira , blinks , blokkzh , bullet-train , bunnyruni , bureau , candy , candy-kingdom , chi , chill , classyTouch , clean , cloud , cordial , crcandy , crunch , cypher , dallas , darkblood , daveverwer , dieter , docker , dogenpunk , dpoggi , drofloh , dst , dstufft , ducula , duellj , eastwood , edvardm , elessar , emotty , enlightenment , essembeh , evan , fino , fino-time , fishy , fishy2 , flazz , fletcherm , fox , frisk , frontcube , funky , funkyberlin , fwalch , gallifrey , gallois , garyblessington , gentoo , geoffgarside , gianu , gitster , gnzh , gozilla , half-life , halil , haribo , hedgehog , humza , hyper-oh-my-zsh , hyperzsh , igorsilva , imajes , imp , imperator-root , intheloop , intika , itchy , jaischeema , jbergantine , jispwoso , jnrowe , jonathan , josh , jovial , jreese , jtriley , juanghurtado , junkfood , kafeitu , kardan , kayid , kennethreitz , kimwz , kinda-fishy , kiwi , kmac , kolo , kphoen , lambda , lambda-gitster , lambda-mod , lambda-v , linuxonly , lukerandall , macovsky , maran , maza , McQuen , mgutz , mh , michelebologna , mikeh , miloshadzic , minimal , minimal2 , minimal_improve , mira , mortalscumbag , mrtazz , murilasso , muse , nanotech , nebirhos , nicoulaj , node , nodeys , norm , nox , nt9 , nuts , obraun , odin , ohwonder , oxide , peepcode , philips , philthy , pi , pmcgee , powerlevel10k , punctual , pygmalion , pygmalion-virtualenv , rafiki , random , random-emoji , re5et , refined , reggae , rgm , risto , rixius , rkj , rkj-repos , robbyrussell , robbyrussell-WIP , sammy , shayan , simonoff , simple , skaro , sm , smt , sobole , Soliah , sonicradish , sorin , sporty_256 , staples , steeef , strug , sunaku , sunrise , superjarin , suvash , takashiyoshida , terminalparty , theunraveler , tjkirch , tjkirch_mod , tonotdo , traditional-plus , trapd00r , typewritten , vero , via , wedisagree , wezm , wezm+ , windows , wuffers , xiong-chiamiov , xiong-chiamiov-plus , xxf , ys , zeroastro , zeta , zhann
+3den , abaykan , adben , af-magic , afowler , agkozak , agnoster , agnosterzak , alanpeabody , alien , alien-minimal , amuse , antsy , aphrodite , apple , arrow , asciigit , aussiegeek , avit , avit-da2k , awesomepanda , bender , bira , blinks , blokkzh , bullet-train , bunnyruni , bureau , candy , candy-kingdom , chi , chill , ciacho , classytouch , clean , cloud , color-input , color-input-line , cordial , crcandy , crunch , cypher , daivasmara , dallas , darkblood , daveverwer , dieter , docker-zsh , dogenpunk , dpoggi , dpoggi-newline-timestamp , drofloh , dst , dstufft , ducula , duellj , eastwood , edvardm , elessar , emotty , enlightenment , essembeh , evan , fino , fino-time , fishbone++ , fishy , fishy2 , flazz , fletcherm , fox , frisk , frontcube , funky , funkyberlin , fwalch , gallifrey , gallois , garyblessington , gentoo , geoffgarside , geometry , gianu , gitstatus , gitster , gnzh , gozilla , half-life , halil , haribo , hedgehog , hub , humza , hyper-oh-my-zsh , hyperzsh , igeek , igorsilva , imajes , imp , imperator , intheloop , intika , itchy , jaischeema , jbergantine , jispwoso , jnrowe , jonathan , josh , jovial , jreese , jtriley , juanghurtado , junkfood , kafeitu , kardan , kayid , kennethreitz , kimwz , kinda-fishy , kiwi , kmac , kolo , kphoen , lambda , lambda-gitster , lambda-mod , lambda-v , linuxonly , lukerandall , macovsky , maran , matte-black-yellow , matte-black-yellow-line , maza , mcquen , mgutz , mh , michelebologna , mikeh , miloshadzic , minimal , minimal-improved , minimal2 , mira , mlh , mortalscumbag , mrtazz , murilasso , muse , nanotech , nebirhos , nicoulaj , node , nodeys , norm , nothing , nt9 , nuts , obraun , odin , oh-wonder , omega , oxide , passion , peepcode , philips , philthy , pi , pmcgee , powerlevel10k , punctual , pure , pygmalion , pygmalion-virtualenv , rafiki-zsh , random , random-emoji , re5et , refined , reggae , retro-term , rgm , risto , rixius , rkj , rkj-repos , robbyrussell , robbyrussell-wip , sammy , schminitz , shayan , short , simonoff , simple , skaro , sm , smt , sobole , Soliah , solus , sonicradish , sorin , spaceship-zsh , sporty_256 , staples , steeef , strug , sunaku , sunrise , superjarin , suvash , takashiyoshida , terminalparty , theta , theunraveler , tjkirch , tjkirch_mod , tonotdo , traditional-plus , trapd00r , typewritten , vero , via , wedisagree , wezm , wezm+ , windows-cmd , wuffers , xiong-chiamiov , xiong-chiamiov-plus , xxf , ys , zeroastro , zeta , zhann , zsh2000 , λpure
 ```
 
 ### 3-3. zshcolor 命令说明
@@ -320,5 +333,5 @@ zinit ice wait lucid pick"fast-syntax-highlighting.plugin.zsh" atinit"ZINIT[COMP
 **[Cabbagec/termux-ohmyzsh](https://github.com/Cabbagec/termux-ohmyzsh)**  
 **[zdharma/fast-syntax-highlighting](https://github.com/zdharma/fast-syntax-highlighting)**
 
-zsh 里面的额外主题是我从[oh-my-zsh/external-themes](https://github.com/ohmyzsh/ohmyzsh/wiki/External-themes)里介绍的 Github 仓库里一个个下载下来的，不保证全都能用。  
+zsh 里面的额外主题是我从[oh-my-zsh/external-themes](https://github.com/ohmyzsh/ohmyzsh/wiki/External-themes)里介绍的 Github 仓库里一个个找的，真的是太辛苦了。 °(°ˊДˋ°) °
 If you find a theme loading error, then you can submit an issue.

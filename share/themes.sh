@@ -81,12 +81,14 @@ get_tmoe_zsh_theme_help_info() {
   序号列表模式。若参数为空，则将进入此模式。
   此模式为交互式操作，您可以先输${GREEN}zshtheme${RESET}启动,接着输入数字序号。
   --------------
-  部分主题需要联网下载。
-
-  以下主题使用git克隆整个仓库：
+    部分主题需要联网下载。
+    Some themes need to be downloaded.
+    The following themes use git to clone their repo:
+    以下主题使用git克隆整个仓库：
     powerlevel10k | pure | via | aphrodite | typewritten | abaykan | agkozak | agnosterzak | alien | alien-minimal | antsy | asciigit | avit-da2k | bender | blokkzh | bullet-train | bunnyruni | chi | chill | ciacho | classytouch | color-input | color-input-line | cordial | daivasmara | docker-zsh | drofloh | ducula | elessar | enlightenment | fishbone++ | fishy2 | funkyberlin | geometry | gitstatus | halil | haribo | hyper-oh-my-zsh | hyperzsh | igeek | igorsilva | imp | jovial | kimwz | kinda-fishy | lambda-mod | lambda-v | matte-black-yellow | matte-black-yellow-line | maza | minimal-improved | minimal2 | node | nodeys | nothing | nt9 | nuts | odin | omega | oxide | pi | punctual | rafiki-zsh  | robbyrussell-wip | shayan | short | sm | sobole | spaceship-zsh | staples | theta | traditional-plus | vero | windows-cmd | zeroastro | zeta | zsh2000 | λpure
   
   以下主题使用了CDN进行下载加速：
+  The following themes use jsdelivr CDN for download acceleration：
   color-input | color-input-line | dpoggi-newline-timestamp | gitster | imperator | intika | kayid | kmac | matte-black-yellow | matte-black-yellow-line | minimal2 | oh-wonder | passion | philthy | retro-term | short
 
   以下主题托管于github gist,下载无加速：
@@ -324,3 +326,4 @@ ENDOFTMOEZSHHELP03
 tmoe_theme_main "$@"
 #gist:Mcquen
 #失效：rainbow-theme
+#pure主题非omz extra-theme
