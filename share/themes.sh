@@ -343,6 +343,7 @@ del_zsh_theme_line() {
 configure_new_zsh_theme_01() {
   #if ! egrep -q "^[^#]*zinit.*${TMOE_ZSH_THEME}" "${ZSHRC_FILE}"; then; fi
   del_zsh_theme_line
+  #此处请保持$ZINIT_THEME_DIR
   sed -i "${ZINIT_THEME_LINE} a\zinit light \${ZINIT_THEME_DIR}/${TMOE_ZSH_THEME}" "${ZSHRC_FILE}"
 }
 ###########
@@ -351,6 +352,20 @@ rm_zsh_git_theme_dir() {
   mkdir -p "${ZINIT_THEME_DIR}"
 }
 ###########
+cat_zsh_theme_readme_md() {
+  CATCAT=''
+  for i in bat batcat; do
+    if [[ $(command -v ${i}) ]]; then
+      CATCAT="${i}"
+    fi
+  done
+  unset i
+  case ${CATCAT} in
+  "") cat ${TMOE_THEME_FILE}/README_min.md ;;
+  *) cat ${TMOE_THEME_FILE}/README_min.md | head -n 16 | ${CATCAT} -l markdown ;;
+  esac
+}
+############
 configure_p9k() {
   #p9k已经停止维护
   if [ ! -e "${CHOSEN_THEME_DIR}/.git" ]; then
@@ -394,12 +409,13 @@ configure_p10k() {
 }
 #############
 echo_git_repo_url() {
-  ZSH_THEME_URL_01=$(cat ${TMOE_THEME_DIR}/${TMOE_ZSH_THEME}/git-repo.txt | head -n 1)
+  ZSH_THEME_URL_01=$(cat ${TMOE_THEME_FILE}/git-repo.txt | head -n 1)
   echo "${YELLOW}${ZSH_THEME_URL_01}${RESET}"
 }
 ############
 git_clone_zsh_theme_model_01() {
   echo_git_repo_url
+  cat_zsh_theme_readme_md
   echo "${BLUE}${CHOSEN_THEME_DIR}${RESET}"
   if [ ! -e "${CHOSEN_THEME_DIR}/.git" ]; then
     rm_zsh_git_theme_dir
@@ -425,7 +441,8 @@ copy_tmoe_zsh_theme() {
 ###########
 curl_new_zsh_theme_from_git_cdn() {
   echo_git_repo_url
-  GIT_THEME_CDN_URL=$(cat ${TMOE_THEME_DIR}/${TMOE_ZSH_THEME}/git-cdn.txt | head -n 1)
+  cat_zsh_theme_readme_md
+  GIT_THEME_CDN_URL=$(cat ${TMOE_THEME_FILE}/git-cdn.txt | head -n 1)
   if [ ! -e "${CHOSEN_THEME_FILE}" ]; then
     mkdir -p "${CHOSEN_THEME_DIR}"
     cd "${CHOSEN_THEME_DIR}"
