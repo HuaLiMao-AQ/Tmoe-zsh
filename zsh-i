@@ -7,6 +7,7 @@ tmoe_zsh_02_main() {
 		cat <<-EOF
 			参数
 			local                                                                        --加载本地文件 Load local file
+			ol 
 			online                                                                       --加载在线文件 Load online file
 			u                                                                            --更新(update tmoe-zsh)
 			h                                                                            --get help info
@@ -16,17 +17,11 @@ tmoe_zsh_02_main() {
 		;;
 	u | up | -u) bash ${TMOE_ZSH_GIT_DIR}/zsh.sh -u ;;
 	h | -h | --h | --help) bash ${TMOE_ZSH_GIT_DIR}/zsh.sh -h ;;
-	--tmoe_container_automatic_configure)
-		bash ${TMOE_ZSH_GIT_DIR}/zsh.sh --tmoe_container_automatic_configure
-		;;
+	--tmoe_container_automatic_configure) bash ${TMOE_ZSH_GIT_DIR}/zsh.sh --tmoe_container_automatic_configure ;;
 	-p | plugin) bash ${TMOE_ZSH_GIT_DIR}/zsh.sh -p ;;
 	local) check_local_git_dir ;;
-	online)
-		curl_tmoe_zsh_script_file
-		;;
-	*)
-		check_local_git_dir
-		;;
+	ol | online) curl_tmoe_zsh_script_file ;;
+	*) check_local_git_dir ;;
 	esac
 }
 ##############
@@ -36,9 +31,9 @@ tmoe_zsh_02_env() {
 	esac
 	TMOE_ZSH_GIT_DIR="${TMOE_ZSH_DIR}/git"
 	TMOE_ZSH_TOOL_DIR="${TMOE_ZSH_GIT_DIR}/tools"
-	case ${TMOE_GIT_REPO} in
+	case ${ZSH_I_URL_02} in
 	"") TMOE_ZSH_SCRIPT_URL='https://gitee.com/mo2/zsh/raw/master/zsh.sh' ;;
-	*) TMOE_ZSH_SCRIPT_URL="${TMOE_GIT_REPO}" ;;
+	*) TMOE_ZSH_SCRIPT_URL="${ZSH_I_URL_02}" ;;
 	esac
 }
 ###############
