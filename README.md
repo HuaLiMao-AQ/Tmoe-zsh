@@ -203,7 +203,7 @@ bash ${TMOE_ZSH_GIT_DIR}/zsh.sh
   NOTES of manual mode
   手动模式的说明
   You can type zshtheme $THEME_NAME to change the zsh theme.
-    In the process of entering zsh, you can press TAB to  complete.
+    In the process of typing zsh, you can press TAB to  complete.
   For example.01: If you type zshtheme agnosterzak,then zsh theme will be changed to agnosterzak.
   02:   zshtheme xiong-chiamiov-plus
   您可以输zshtheme $主题名称来修改主题。
