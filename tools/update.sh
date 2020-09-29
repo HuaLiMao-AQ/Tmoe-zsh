@@ -2,20 +2,21 @@
 ################
 upgrade_zsh_plugins_main() {
     case "$1" in
-    -download) download_tmoe_zsh ;;
-    *)
-        UPDATE_ZSH_THEME_COMPLETION=false
-        zinit_ascii
-        update_command_not_found
-        git_pull_powerlevel_10k
-        #upgrade zsh plugins and tool
-        #git_pull_tmoe_zsh
-        git_pull_oh_my_zsh
-        git_pull_zinit
-        neko_01
-        git_clone_tmoe_zsh
-        upgrade_tmoe_zsh_script
-        #tmoe_zsh_main_menu
+        -download) download_tmoe_zsh ;;
+        *)
+            UPDATE_ZSH_THEME_COMPLETION=false
+            check_zsh_theme_completion
+            zinit_ascii
+            update_command_not_found
+            git_pull_powerlevel_10k
+            #upgrade zsh plugins and tool
+            #git_pull_tmoe_zsh
+            git_pull_oh_my_zsh
+            git_pull_zinit
+            neko_01
+            git_clone_tmoe_zsh
+            upgrade_tmoe_zsh_script
+            #tmoe_zsh_main_menu
         ;;
     esac
 }
@@ -29,16 +30,15 @@ chmod_plus_x_zsh_i() {
     sudo mv -f .zsh-i ${PREFIX}/bin/zsh-i || su -c "mv -f .zsh-i ${PREFIX}/bin/zsh-i"
 }
 ##########
-update_zsh_theme_completion(){ 
-    rm -rv $(echo ${ZSH_THEME_COMPLETION_FILE} | sed 's@^/@@g ; 's@/@---@g'') ${ZINIT_DIR}/completions/_zshtheme 2>/dev/null 
+update_zsh_theme_completion(){
+    rm -rv $(echo ${ZSH_THEME_COMPLETION_FILE} | sed 's@^/@@g ; 's@/@---@g'') ${ZINIT_DIR}/completions/_zshtheme 2>/dev/null
     if [ ! -e ${PREFIX}/bin/zshtheme ];then
-        sed -i '/alias zshtheme=/d' ${HOME}/.zshrc ${HOME}/.profile
-        ln -sf ${TMOE_ZSH_TERMUX_PATH}/themes.sh ${PREFIX}/bin/zshtheme || sudo ln -sf ${TMOE_ZSH_TERMUX_PATH}/themes.sh ${PREFIX}/bin/zshtheme
+        sed -i '/alias zshtheme=/d' ${HOME}/.zshrc ${HOME}/.profile 2>/dev/null
+        ln -svf ${TMOE_ZSH_TERMUX_PATH}/themes.sh ${PREFIX}/bin/zshtheme || sudo ln -svf ${TMOE_ZSH_TERMUX_PATH}/themes.sh ${PREFIX}/bin/zshtheme
     fi
 }
 #############
-download_tmoe_zsh() {
-    #bash -c "$(curl -L https://cdn.jsdelivr.net/gh/2moe/tmoe-zsh/zsh.sh)"
+check_zsh_theme_completion(){
     ZSH_THEME_COMPLETION_FILE="${TMOE_ZSH_TERMUX_PATH}/completion/_zshtheme"
     if ! egrep -q '^[^#]*zinit.*completion/_zshtheme' ${HOME}/.zshrc;then
         #mkdir -p ${ZINIT_SNIPPETS_LOCAL}
@@ -46,33 +46,37 @@ download_tmoe_zsh() {
         update_zsh_theme_completion
     fi
     case ${UPDATE_ZSH_THEME_COMPLETION} in
-    true) update_zsh_theme_completion ;;
+        true) update_zsh_theme_completion ;;
     esac
+}
+################
+download_tmoe_zsh() {
+    #bash -c "$(curl -L https://cdn.jsdelivr.net/gh/2moe/tmoe-zsh/zsh.sh)"
     case ${TMOE_GIT_REPO} in
-    'https://github.com/2moe/tmoe-zsh')
-        ZSH_I_URL='https://cdn.jsdelivr.net/gh/2moe/tmoe-zsh@2/zsh-i'
-        ZSH_I_URL_02='https://cdn.jsdelivr.net/gh/2moe/tmoe-zsh/zsh.sh'
+        'https://github.com/2moe/tmoe-zsh')
+            ZSH_I_URL='https://cdn.jsdelivr.net/gh/2moe/tmoe-zsh@2/zsh-i'
+            ZSH_I_URL_02='https://cdn.jsdelivr.net/gh/2moe/tmoe-zsh/zsh.sh'
         ;;
-    *)
-        ZSH_I_URL="${TMOE_GIT_REPO}/raw/2/zsh-i"
-        ZSH_I_URL_02="${TMOE_GIT_REPO}/raw/master/zsh.sh"
+        *)
+            ZSH_I_URL="${TMOE_GIT_REPO}/raw/2/zsh-i"
+            ZSH_I_URL_02="${TMOE_GIT_REPO}/raw/master/zsh.sh"
         ;;
     esac
     case "${LINUX_DISTRO}" in
-    Android)
-        curl_zsh_i
-        termux-fix-shebang ${PREFIX}/bin/zsh-i
-        chmod +x ${PREFIX}/bin/zsh-i
+        Android)
+            curl_zsh_i
+            termux-fix-shebang ${PREFIX}/bin/zsh-i
+            chmod +x ${PREFIX}/bin/zsh-i
         ;;
-    alpine)
-        cd /tmp
-        wget -O .zsh-i ${ZSH_I_URL}
-        chmod_plus_x_zsh_i
+        alpine)
+            cd /tmp
+            wget -O .zsh-i ${ZSH_I_URL}
+            chmod_plus_x_zsh_i
         ;;
-    *)
-        cd /tmp
-        curl -Lv -o .zsh-i ${ZSH_I_URL}
-        chmod_plus_x_zsh_i
+        *)
+            cd /tmp
+            curl -Lv -o .zsh-i ${ZSH_I_URL}
+            chmod_plus_x_zsh_i
         ;;
     esac
 }
@@ -93,20 +97,20 @@ upgrade_tmoe_zsh_script() {
 update_command_not_found() {
     if [ -e "/usr/lib/command-not-found" ]; then
         case "${LINUX_DISTRO}" in
-        debian)
-            case "${DEBIAN_DISTRO}" in
-            ubuntu) ;;
-            *)
-                case $(id -u) in
-                0)
-                    apt-file update 2>/dev/null
-                    update-command-not-found 2>/dev/null
+            debian)
+                case "${DEBIAN_DISTRO}" in
+                    ubuntu) ;;
+                    *)
+                        case $(id -u) in
+                            0)
+                                apt-file update 2>/dev/null
+                                update-command-not-found 2>/dev/null
+                            ;;
+                            *) ;;
+                            #非root不更新，避免输入sudo密码
+                        esac
                     ;;
-                *) ;;
-                    #非root不更新，避免输入sudo密码
                 esac
-                ;;
-            esac
             ;;
         esac
     fi
@@ -131,11 +135,11 @@ tmoe_git_pull_origin_master() {
     git reset --hard origin/master
     git pull --rebase --stat --depth=1 origin master --allow-unrelated-histories || git rebase --skip
     case "${?}" in
-    0) ;;
-    *)
-        git fetch --depth=2
-        git reset --hard
-        git pull --rebase --stat --allow-unrelated-histories || git rebase --skip
+        0) ;;
+        *)
+            git fetch --depth=2
+            git reset --hard
+            git pull --rebase --stat --allow-unrelated-histories || git rebase --skip
         ;;
     esac
 }
