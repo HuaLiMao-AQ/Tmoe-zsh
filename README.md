@@ -143,7 +143,8 @@ mv "${ZSHRC_FILE}" "${ZSHRC_FILE}_$(date +%Y%m%d).bak"
 
 10.其它 system 未测试,以下系统请自行解决依赖关系。  
 例如:**GuixSD**等发行版。  
-还有 Unix 系统，例如：**MacOS、FreeBSD、OpenBSD、NetBSD**和**SunOS**等。  
+不支持Unix 系统，例如：**MacOS、FreeBSD、OpenBSD、NetBSD**和**SunOS**等。  
+
 相关依赖为 `zsh git pv wget tar xz newt(whiptail)`
 
 ### 2-2.MUNUALLY GIT CLONE 手动克隆
