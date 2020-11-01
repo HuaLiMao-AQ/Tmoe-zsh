@@ -34,6 +34,7 @@ git_clone_nerd_fonts() {
     else
         printf "%s\n" "Do you want to download it?[Y/n]"
         do_you_want_to_continue
+        cd ${TMPDIR}
         rm -rvf ${LOCAL_FONT_DIR} 2>/dev/null || sudo rm -rvf ${LOCAL_FONT_DIR}
         mkdir -p ${LOCAL_FONT_DIR} || sudo mkdir -p ${LOCAL_FONT_DIR}
         sudo git clone --depth=1 https://gitee.com/ak2/mono-nerd-fonts.git ${LOCAL_FONT_DIR}
@@ -57,6 +58,7 @@ termux_git_clone_nerd_fonts() {
     else
         printf "%s\n" "Do you want to download it?[Y/n]"
         do_you_want_to_continue
+        cd ${TMPDIR}
         chmod -Rv 777 ${LOCAL_FONT_DIR} 2>/dev/null
         rm -rvf ${LOCAL_FONT_DIR} 2>/dev/null
         mkdir -p ${LOCAL_FONT_DIR}
