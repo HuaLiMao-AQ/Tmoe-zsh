@@ -36,7 +36,7 @@ git_clone_nerd_fonts() {
         do_you_want_to_continue
         cd ${TMPDIR}
         rm -rvf ${LOCAL_FONT_DIR} 2>/dev/null || sudo rm -rvf ${LOCAL_FONT_DIR}
-        mkdir -p ${LOCAL_FONT_DIR} || sudo mkdir -p ${LOCAL_FONT_DIR}
+        mkdir -p ${LOCAL_FONT_DIR} 2>/dev/null || sudo mkdir -p ${LOCAL_FONT_DIR}
         sudo git clone --depth=1 https://gitee.com/ak2/mono-nerd-fonts.git ${LOCAL_FONT_DIR}
         cd ${LOCAL_FONT_DIR}
         sudo cat .nerd_fonts_0* >nerd_fonts.tar.xz
