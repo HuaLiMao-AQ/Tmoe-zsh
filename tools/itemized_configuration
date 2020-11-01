@@ -34,14 +34,19 @@ git_clone_nerd_fonts() {
     else
         printf "%s\n" "Do you want to download it?[Y/n]"
         do_you_want_to_continue
-        cd ${TMPDIR}
         rm -rvf ${LOCAL_FONT_DIR} 2>/dev/null || sudo rm -rvf ${LOCAL_FONT_DIR}
         mkdir -p ${LOCAL_FONT_DIR} 2>/dev/null || sudo mkdir -p ${LOCAL_FONT_DIR}
-        sudo git clone --depth=1 https://gitee.com/ak2/mono-nerd-fonts.git ${LOCAL_FONT_DIR}
+        cd ${TMPDIR}
+        if [[ -e .mono-nerd-fonts ]]; then
+            rm -rfv .mono-nerd-fonts || sudo rm -rvf .mono-nerd-fonts
+        fi
+        git clone --depth=1 https://gitee.com/ak2/mono-nerd-fonts.git ${TMPDIR}/.mono-nerd-fonts
+        cd .mono-nerd-fonts
+        cat .nerd_fonts_0* >nerd_fonts.tar.xz
+        sudo mv -f nerd_fonts.tar.xz ${LOCAL_FONT_DIR}
         cd ${LOCAL_FONT_DIR}
-        sudo cat .nerd_fonts_0* >nerd_fonts.tar.xz
         sudo tar -Jxvf nerd_fonts.tar.xz
-        sudo rm -rvf .git .nerd_fonts_0*
+        sudo rm -rvf .git /tmp/.mono-nerd-fonts
         sudo mkfontscale 2>/dev/null
         sudo mkfontdir 2>/dev/null
         sudo fc-cache 2>/dev/null
