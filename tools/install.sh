@@ -375,10 +375,18 @@ tips_of_tmoe_zsh_01() {
     用法示例：${GREEN}man ssh${RESET}高亮显示ssh-client的文档（用户手册）。
     ${GREEN}man bash${RESET}获取bash的用户手册。
     ------------
+    ${BOLD}${YELLOW}插件名称PLUGIN NAME${RESET}${RESET}:${BOLD}${BLUE}sudo${RESET}${RESET}
+    ${BOLD}${YELLOW}Description${RESET}${RESET}: ${BLUE}按两次ESC键,可以在当前命令前加上sudo前缀${RESET}.
+    Easily prefix your current or previous commands with ${GREEN}sudo${RESET} by pressing ${YELLOW}ESC${RESET} twice
+    ------------
     ${BOLD}${YELLOW}Other${RESET}${RESET}
     补全插件用法：
     输入已知命令或函数的部分字符后，按下${BOLD}${BLUE}TAB键${RESET}${RESET}
     You can press ${BOLD}${BLUE}TAB KEY${RESET}${RESET} to use auto completion plugin.
+    用法示例：输入${GREEN}zshtheme${RESET}后，按下空格，再按下${BLUE}TAB键${RESET}
+    ------------
+    历史记录插件用法：
+    输入曾输过的命令，按下方向键上${YELLOW}↑${RESET}或右${YELLOW}→${RESET}
     ------------
     Plugins such as extract, git ,fast-syntax-highlighting , fzf-tab and z have been configured for you. Enjoy the fun of zsh!
 ENDOFTMOEZSHHELPINFO
