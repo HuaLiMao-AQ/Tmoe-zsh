@@ -386,7 +386,7 @@ tips_of_tmoe_zsh_01() {
     用法示例：输入${GREEN}zshtheme${RESET}后，按下空格，再按下${BLUE}TAB键${RESET}
     ------------
     历史记录插件用法：
-    输入曾输过的命令，按下方向键上${YELLOW}↑${RESET}或右${YELLOW}→${RESET}
+    输入曾输过的命令，按方向键上${YELLOW}↑${RESET}或右${YELLOW}→${RESET}进行补全。
     ------------
     Plugins such as extract, git ,fast-syntax-highlighting , fzf-tab and z have been configured for you. Enjoy the fun of zsh!
 ENDOFTMOEZSHHELPINFO
