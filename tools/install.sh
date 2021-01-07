@@ -354,8 +354,8 @@ tips_of_tmoe_zsh_01() {
     若您的系统满足依赖条件，则ls将alias为exa.
     exa是一款优秀的ls替代品,拥有更好的文件展示体验,输出结果更快,使用rust编写。
     Exa is a modern version of ls. 
-    输入${GREEN}lst${RESET},将展示类似于tree的树状列表。
     输入${GREEN}l${RESET},将显示当前目录的文件列表。
+    输入${GREEN}lst${RESET},将展示类似于tree的树状列表。
     输入${GREEN}lls${RESET},使用原版ls
     -----------
     ${BOLD}${YELLOW}应用名称 APP NAME${RESET}${RESET}:${BOLD}${BLUE}bat${RESET}${RESET}
@@ -376,19 +376,20 @@ tips_of_tmoe_zsh_01() {
     ${GREEN}man bash${RESET}获取bash的用户手册。
     ------------
     ${BOLD}${YELLOW}插件名称PLUGIN NAME${RESET}${RESET}:${BOLD}${BLUE}sudo${RESET}${RESET}
-    ${BOLD}${YELLOW}Description${RESET}${RESET}: ${BLUE}按两次ESC键,可以在当前命令前加上sudo前缀${RESET}.
+    ${BOLD}${YELLOW}Description${RESET}${RESET}: ${BLUE}按两下ESC键,可以在当前命令前加上sudo前缀${RESET}.
     Easily prefix your current or previous commands with ${GREEN}sudo${RESET} by pressing ${YELLOW}ESC${RESET} twice
     ------------
     ${BOLD}${YELLOW}Other${RESET}${RESET}
-    补全插件用法：
-    输入已知命令或函数的部分字符后，按下${BOLD}${BLUE}TAB键${RESET}${RESET}
-    You can press ${BOLD}${BLUE}TAB KEY${RESET}${RESET} to use auto completion plugin.
+    ${BOLD}${YELLOW}补全插件${RESET}${RESET}:输入已知命令或函数的部分字符后，按下${BOLD}${BLUE}TAB键${RESET}${RESET}
     用法示例：输入${GREEN}zshtheme${RESET}后，按下空格，再按下${BLUE}TAB键${RESET}
+    ${BOLD}${YELLOW}Description${RESET}${RESET}:You can press ${BOLD}${BLUE}TAB KEY${RESET}${RESET} to use auto completion plugin.
     ------------
-    历史记录插件用法：
-    输入曾输过的命令，按方向键上${YELLOW}↑${RESET}或右${YELLOW}→${RESET}进行补全。
+    ${BOLD}${YELLOW}插件名称PLUGIN NAME${RESET}${RESET}:${BOLD}${BLUE}zsh-autosuggestions${RESET}${RESET}
+    ${BOLD}${YELLOW}历史记录插件用法${RESET}${RESET}:输入曾输过的命令，按方向键上${BOLD}${YELLOW}↑${RESET}或右${BOLD}${YELLOW}→${RESET}进行补全。
+    ${BOLD}${YELLOW}Description${RESET}${RESET}:It suggests commands as you type based on history and completions.
+    Just type arrow key ${BOLD}${YELLOW}↑${RESET}or${BOLD}${YELLOW}→${RESET}
     ------------
-    Plugins such as extract, git ,fast-syntax-highlighting , fzf-tab and z have been configured for you. Enjoy the fun of zsh!
+    Plugins such as extract, git, fast-syntax-highlighting, fzf-tab, zshtheme and z have been configured for you. Enjoy the fun of zsh!
 ENDOFTMOEZSHHELPINFO
 }
 ######################
