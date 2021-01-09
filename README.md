@@ -143,7 +143,7 @@ mv "${ZSHRC_FILE}" "${ZSHRC_FILE}_$(date +%Y%m%d).bak"
 
 10.其它 system 未测试,以下系统请自行解决依赖关系。  
 例如:**GuixSD**等发行版。  
-不支持Unix 系统，例如：**MacOS、FreeBSD、OpenBSD、NetBSD**和**SunOS**等。  
+不支持 Unix 系统，例如：**MacOS、FreeBSD、OpenBSD、NetBSD**和**SunOS**等。
 
 相关依赖为 `zsh git pv wget tar xz newt(whiptail)`
 
@@ -152,7 +152,7 @@ mv "${ZSHRC_FILE}" "${ZSHRC_FILE}_$(date +%Y%m%d).bak"
 ```bash
 TMOE_ZSH_DIR="${HOME}/.config/tmoe-zsh"
 TMOE_ZSH_GIT_DIR="${TMOE_ZSH_DIR}/git"
-mkdir -p ${TMOE_ZSH_DIR}
+mkdir -pv ${TMOE_ZSH_DIR}
 git clone --depth=1 https://gitee.com/mo2/zsh "${TMOE_ZSH_GIT_DIR}"
 bash ${TMOE_ZSH_GIT_DIR}/zsh.sh
 ```
