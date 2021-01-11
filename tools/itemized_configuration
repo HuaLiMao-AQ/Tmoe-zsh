@@ -199,7 +199,7 @@ download_iosevka_font() {
     wget -qO 'Iosevka.tar.xz' 'https://gitee.com/ak2/inconsolata-go-font/raw/master/Iosevka-Term-Mono.tar.xz'
     tar -Jxvf 'Iosevka.tar.xz'
     rm -f 'Iosevka.tar.xz'
-    mv -f Iosevka-Term-Mono.ttf '/usr/share/fonts/truetype/iosevka/'
+    mv -f Iosevka.ttf '/usr/share/fonts/truetype/iosevka/'
 }
 ###############
 this_feature_is_not_support_android() {
