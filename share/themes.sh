@@ -182,7 +182,7 @@ cat_zsh_theme_readme_md() {
   check_catcat
   case ${CATCAT} in
   "") cat ${TMOE_THEME_FILE}/README_min.md ;;
-  *) cat ${TMOE_THEME_FILE}/README_min.md | head -n 15 | ${CATCAT} -l markdown --pager "less -m -RFeQ" ;;
+  *) cat ${TMOE_THEME_FILE}/README_min.md | head -n 16 | ${CATCAT} -l markdown -ppn ;;
   esac
 }
 ############
@@ -195,7 +195,9 @@ cat_zsh_theme_readme_full_md() {
 }
 ############
 check_readme_file() {
-  if [[ -e "${CHOSEN_THEME_DIR}/README.md" || ${ONKEY_INSTALLATION} != true ]]; then
+  if [[ ${ONKEY_INSTALLATION} = true ]]; then
+    cat_zsh_theme_readme_md
+  elif [[ -e "${CHOSEN_THEME_DIR}/README.md" ]]; then
     README_LINE_NUM=$(wc -l "${CHOSEN_THEME_DIR}/README.md" | awk '{print $1}')
     cat_zsh_theme_readme_full_md
   elif [ -e "${TMOE_THEME_FILE}/README_min.md" ]; then
