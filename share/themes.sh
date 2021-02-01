@@ -25,7 +25,7 @@ tmoe_theme_main() {
 }
 ##############
 exec_zsh() {
-  if [[ ${NON_EXEC_ZSH} != true || ${TMOE_CONTAINER_AUTO_CONFIGURE} != true || ${ONKEY_INSTALLATION} != true ]]; then
+  if [[ ${NON_EXEC_ZSH} != true && ${TMOE_CONTAINER_AUTO_CONFIGURE} != true && ${ONKEY_INSTALLATION} != true ]]; then
     exec zsh
   fi
 }
