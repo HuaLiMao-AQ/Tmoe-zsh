@@ -17,8 +17,8 @@ tmoe_zsh_02_main() {
 		;;
 	u | up | -u) source ${TMOE_ZSH_GIT_DIR}/zsh.sh -u ;;
 	h | -h | --h | --help) source ${TMOE_ZSH_GIT_DIR}/zsh.sh -h ;;
-	--tmoe_container_auto_configure|--auto) source ${TMOE_ZSH_GIT_DIR}/zsh.sh --tmoe_container_auto_configure ;;
-	p|-p | plugin) source ${TMOE_ZSH_GIT_DIR}/zsh.sh -p ;;
+	--tmoe_container_auto_configure | --auto) source ${TMOE_ZSH_GIT_DIR}/zsh.sh --tmoe_container_auto_configure ;;
+	p | -p | plugin) source ${TMOE_ZSH_GIT_DIR}/zsh.sh -p ;;
 	local) check_local_git_dir ;;
 	ol | online) curl_tmoe_zsh_script_file ;;
 	*) check_local_git_dir ;;
@@ -32,7 +32,7 @@ tmoe_zsh_02_env() {
 	TMOE_ZSH_GIT_DIR="${TMOE_ZSH_DIR}/git"
 	TMOE_ZSH_TOOL_DIR="${TMOE_ZSH_GIT_DIR}/tools"
 	case ${ZSH_I_URL_02} in
-	"") TMOE_ZSH_SCRIPT_URL='https://gitee.com/mo2/zsh/raw/master/zsh.sh' ;;
+	"") TMOE_ZSH_SCRIPT_URL='https://cdn.jsdelivr.net/gh/2moe/tmoe-zsh@master/.mirror/zsh' ;;
 	*) TMOE_ZSH_SCRIPT_URL="${ZSH_I_URL_02}" ;;
 	esac
 }
