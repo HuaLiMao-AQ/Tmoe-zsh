@@ -174,7 +174,7 @@ openwrt_router_zsh_command() {
 ############
 check_linux_distro() {
 	TMOE_UPDATE_COMMAND=''
-	if grep -Eq 'debian|ubuntu|deepin|uos' "/etc/os-release" 2>/dev/null; then
+	if grep -Eq 'debian|ubuntu|deepin|uos\.com' "/etc/os-release" 2>/dev/null || [[ $(command -v apt-cache) && $(command -v dpkg) ]]; then
 		LINUX_DISTRO='debian'
 		TMOE_UPDATE_COMMAND='apt update'
 		TMOE_INSTALLATON_COMMAND='eatmydata apt install -y'
@@ -231,7 +231,7 @@ check_linux_distro() {
 		TMOE_INSTALLATON_COMMAND='xbps-install -S -y'
 		TMOE_REMOVAL_COMMAND='xbps-remove -R'
 
-	elif grep -Eq "Slackware" '/etc/os-release' 2>/dev/null; then
+	elif grep -q "Slackware" '/etc/os-release' 2>/dev/null; then
 		LINUX_DISTRO='slackware'
 
 	elif grep -q 'Solus' '/etc/os-release'; then
@@ -357,11 +357,11 @@ check_gnu_linux_git_and_whiptail() {
 			opkg update
 			install_dependencies_01 || opkg install ${DEPENDENCIES}
 			;;
-		alpine | arch | redhat | void | gentoo | suse | slackware)
+		alpine | arch | redhat | void | gentoo | suse | slackware | solus)
 			install_dependencies_01
 			;;
 		*)
-			printf "%s\n" "不支持您当前的发行版，您可以前往git仓库地址提交issue,并附上${BLUE}cat /etc/os-release${RESET}的截图。"
+			printf "%s\n" "${RED}不支持${RESET}您当前的发行版，您可以前往${YELLOW}https://github.com/2moe/tmoe-zsh${RESET}提交issue,并附上${BLUE}cat /etc/os-release${RESET}的截图。"
 			press_enter_to_continue
 			check_root
 			apt update
