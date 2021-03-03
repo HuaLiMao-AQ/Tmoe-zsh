@@ -252,7 +252,7 @@ if ! egrep -q '^[^#]*zinit.*completion/_zshtheme' ${ZSHRC_FILE}; then
 fi
 
 for i in /opt/homebrew/bin /usr/local/bin ${PREFIX}/bin;do
-    if [[ -e ${i} ]];then
+    if [[ -d ${i} ]];then
         BIN_DIR=${i}
         break
     fi
@@ -260,6 +260,7 @@ done
 
 chmod -R g-w /usr/local/share/zsh || sudo chmod -R g-w /usr/local/share/zsh
 ln -sv ${TMOE_ZSH_DIR}/git/share/themes.sh ${BIN_DIR}/zshtheme || sudo ln -svf ${TMOE_ZSH_DIR}/git/share/themes.sh ${BIN_DIR}/zshtheme
+ln -sv ${TMOE_ZSH_DIR}/git/zsh.sh ${BIN_DIR}/zsh-i || sudo ln -svf ${TMOE_ZSH_DIR}/git/zsh.sh ${BIN_DIR}/zsh-i
 ```
 
 ##### bsd-sed -> gnu-sed ; bsd-awk -> gnu-awk
