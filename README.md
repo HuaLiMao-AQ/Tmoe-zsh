@@ -156,9 +156,10 @@ If you do not live in China, then type `bash -c "$(curl -L git.io/zsh.sh)"`
     bash -c "$(wget -qO- gitee.com/mo2/zsh/raw/2/2)"
 ```
 
-11.其它 system 未测试,以下系统请自行解决依赖关系。  
+11.Other  
+其它 system 未测试,以下系统请自行解决依赖关系。  
 例如:**GuixSD**等发行版。  
-BSD 系统请参考手动配置步骤，例如：**MacOS、FreeBSD、OpenBSD、NetBSD**和**SunOS**等。
+BSD 系统(例如：**MacOS、FreeBSD、OpenBSD、NetBSD**和**SunOS**等)请参考手动配置步骤
 
 相关依赖为 `zsh git pv wget tar xz newt(whiptail)`
 
