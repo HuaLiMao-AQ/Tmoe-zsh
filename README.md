@@ -200,7 +200,9 @@ If you are using Apple Silicon arm64 CPU, then you should add `brew` to your PAT
 如果您正在使用Apple M1或其他Apple arm64 cpu的mac设备，那么请将 **/opt/homebrew/bin** 加入到环境变量中。  
 
 ```bash
-    grep -qF '/opt/homebrew/bin' /etc/paths || sudo sed -i "" '1i/opt/homebrew/bin' /etc/paths
+grep -qF '/opt/homebrew/bin' /etc/paths || sudo sed -i "" '1i \
+/opt/homebrew/bin
+' /etc/paths
 ```
 
 ##### install dependencies
