@@ -182,8 +182,8 @@ If you are using MacOS, then install **homebrew** before configuration.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-如果您使用的是苹果MacOS，那么请在配置前先安装 **homebrew**
-您可以通过[BFSU镜像站](https://mirrors.bfsu.edu.cn/help/homebrew/)或者[TUNA镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)来安装 **homebrew**
+如果您使用的是苹果MacOS，那么请在配置前先安装 **homebrew**  
+您可以通过[BFSU镜像站](https://mirrors.bfsu.edu.cn/help/homebrew/)或者[TUNA镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)来安装 **homebrew**  
 
 ```bash
 if ! egrep -q '^[^#]*ex.*HOMEBREW_BREW_GIT_REMOTE=' ~/.zprofile;then
@@ -196,8 +196,8 @@ fi
 /bin/bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/Homebrew/install@master/install.sh | sed -E 's#^(\s*)(HOMEBREW_(BREW|CORE)_GIT_REMOTE)=(.*)$#\1\2="${\2:-\4}"#')"
 ```
 
-If you are using Apple Silicon arm64 CPU, then you should add `brew` to your PATH.
-如果您正在使用Apple M1或其他Apple arm64 cpu的mac设备，那么请将 **/opt/homebrew/bin** 加入到环境变量中。
+If you are using Apple Silicon arm64 CPU, then you should add `brew` to your PATH.  
+如果您正在使用Apple M1或其他Apple arm64 cpu的mac设备，那么请将 **/opt/homebrew/bin** 加入到环境变量中。  
 
 ```bash
     grep -qF '/opt/homebrew/bin' /etc/paths || sudo sed -i "" '1i/opt/homebrew/bin' /etc/paths
@@ -266,10 +266,10 @@ ln -sv ${TMOE_ZSH_DIR}/git/share/themes.sh ${BIN_DIR}/zshtheme || sudo ln -svf $
     ln -sv $(command -v gawk) /usr/local/bin/awk || sudo ln -svf $(command -v gawk) /usr/local/bin/awk
 ```
 
-Finally, restart the terminal, and type `zshtheme`
+Finally, restart the terminal, and type `zshtheme`  
 
-If you want to continue using this script, it is recommended that you keep gnu-sed as the default sed.
-If you want to restore to bsd-sed, type the following commands.
+If you want to continue using this script, it is recommended that you keep gnu-sed as the default sed.  
+If you want to restore to bsd-sed, type the following commands.  
 
 ```shell
 for i in sed awk;do
@@ -279,16 +279,16 @@ done
 
 #### windows-terminal
 
-![Snipaste_2021-03-02_21-13-58.png](https://i.loli.net/2021/03/03/l8RDesWStPYCwjr.png)
+![Snipaste_2021-03-02_21-13-58.png](https://i.loli.net/2021/03/03/l8RDesWStPYCwjr.png)  
 
-If you are using win10, then you can beautify windows-terminal.
+If you are using win10, then you can beautify windows-terminal.  
 
-Open [this json file](https://github.com/2moe/tmoe-zsh/blob/master/config/windows-terminal.json)
+Open [this json file](https://github.com/2moe/tmoe-zsh/blob/master/config/windows-terminal.json)  
 
-And copy the contents of the **"schemes"** array to **settings.json**
+And copy the contents of the **"schemes"** array to **settings.json**  
 ![settings.json](https://images.gitee.com/uploads/images/2021/0303/170741_5b42d4d4_5617340.png "Screenshot_20210303_164039.png")
 
-If you are using [windows terminal preview](https://aka.ms/terminal-preview), then you can add `settingsUI` hot key to **settings.json**
+If you are using [windows terminal preview](https://aka.ms/terminal-preview), then you can add `settingsUI` hot key to **"keybindings"** array.
 
 ```json
  "keybindings": [
