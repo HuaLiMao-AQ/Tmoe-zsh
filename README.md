@@ -183,8 +183,8 @@ If you are using MacOS, then install **homebrew** before configuration.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-如果您使用的是苹果MacOS，那么请在配置前先安装 **homebrew**  
-您可以通过[BFSU镜像站](https://mirrors.bfsu.edu.cn/help/homebrew/)或者[TUNA镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)来安装 **homebrew**  
+如果您使用的是苹果 MacOS，那么请在配置前先安装 **homebrew**  
+您可以通过[BFSU 镜像站](https://mirrors.bfsu.edu.cn/help/homebrew/)或者[TUNA 镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)来安装 **homebrew**
 
 ```bash
 if ! egrep -q '^[^#]*ex.*HOMEBREW_BREW_GIT_REMOTE=' ~/.zprofile;then
@@ -198,7 +198,7 @@ fi
 ```
 
 If you are using Apple Silicon arm64 CPU, then you should add `brew` to your PATH.  
-如果您正在使用Apple M1或其他Apple arm64 cpu的mac设备，那么请将 **/opt/homebrew/bin** 加入到环境变量中。  
+如果您正在使用 Apple M1 或其他 Apple arm64 cpu 的 mac 设备，那么请将 **/opt/homebrew/bin** 加入到环境变量中。
 
 ```bash
 grep -qF '/opt/homebrew/bin' /etc/paths || sudo /usr/bin/sed -i "" '1i \
@@ -227,7 +227,7 @@ git clone --depth=1 git://github.com/ohmyzsh/ohmyzsh ${ZINIT_DIR}/omz
 git clone --depth=1 git://github.com/Aloxaf/fzf-tab "${ZINIT_DIR}/plugins/_local---fzf-tab"
 git clone --depth=1 git://github.com/zdharma/fast-syntax-highlighting "${ZINIT_DIR}/plugins/_local---fast-syntax-highlighting"
 git clone --depth=1 git://github.com/zsh-users/zsh-autosuggestions "${ZINIT_DIR}/plugins/_local---zsh-autosuggestions"
-    
+
 cd ${ZINIT_DIR}/omz/plugins
 for i in $(ls ${PWD}); do
     if [[ -d "${i}" && ! -e "${ZINIT_DIR}/plugins/_local---${i}" ]]; then
@@ -251,7 +251,7 @@ if ! egrep -q '^[^#]*zinit.*completion/_zshtheme' ${ZSHRC_FILE}; then
     printf "%s\n" "zinit ice lucid wait="1" as"completion" && zinit snippet ${TMOE_ZSH_DIR}/git/share/completion/_zshtheme" >>${ZSHRC_FILE}
 fi
 
-for i in /usr/local/bin ${PREFIX}/bin;do
+for i in /opt/homebrew/bin /usr/local/bin ${PREFIX}/bin;do
     if [[ -e ${i} ]];then
         BIN_DIR=${i}
         break
@@ -265,28 +265,28 @@ ln -sv ${TMOE_ZSH_DIR}/git/share/themes.sh ${BIN_DIR}/zshtheme || sudo ln -svf $
 ##### bsd-sed -> gnu-sed ; bsd-awk -> gnu-awk
 
 ```shell
-    ln -sv $(command -v gsed) /usr/local/bin/sed || sudo ln -svf $(command -v gsed) /usr/local/bin/sed
-    ln -sv $(command -v gawk) /usr/local/bin/awk || sudo ln -svf $(command -v gawk) /usr/local/bin/awk
+    ln -sv $(command -v gsed) ${BIN_DIR}/sed || sudo ln -svf $(command -v gsed) ${BIN_DIR}/sed
+    ln -sv $(command -v gawk) ${BIN_DIR}/awk || sudo ln -svf $(command -v gawk) ${BIN_DIR}/awk
 ```
 
-Finally, restart the terminal, and type `zshtheme`  
+Finally, restart the terminal, and type `zshtheme`
 
 If you want to continue using this script, it is recommended that you keep gnu-sed as the default sed.  
-If you want to restore to bsd-sed, type the following commands.  
+If you want to restore to bsd-sed, type the following commands.
 
 ```shell
 for i in sed awk;do
-    sudo unlink /usr/local/bin/${i}
+    sudo unlink ${BIN_DIR}/${i}
 done
 ```
 
 #### windows-terminal
 
-![Snipaste_2021-03-02_21-13-58.png](https://i.loli.net/2021/03/03/l8RDesWStPYCwjr.png)  
+![Snipaste_2021-03-02_21-13-58.png](https://i.loli.net/2021/03/03/l8RDesWStPYCwjr.png)
 
-If you are using win10, then you can beautify windows-terminal.  
+If you are using win10, then you can beautify windows-terminal.
 
-Open [this json file](https://github.com/2moe/tmoe-zsh/blob/master/config/windows-terminal.json)  
+Open [this json file](https://github.com/2moe/tmoe-zsh/blob/master/config/windows-terminal.json)
 
 And copy the contents of the **"schemes"** array to **settings.json**  
 ![settings.json](https://images.gitee.com/uploads/images/2021/0303/170741_5b42d4d4_5617340.png "Screenshot_20210303_164039.png")
