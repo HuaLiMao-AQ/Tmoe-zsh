@@ -88,7 +88,7 @@ If you do not live in China, then type
 
 2.Debian/Ubuntu/Mint/Kali
 
-如果您使用的是 精简版容器系统，则请先安装 `sudo` 和 `wget`
+如果您使用的是精简版容器/系统，则请先安装 `sudo` 和 `wget`
 
 ```shell
     sudo apt update || su -c "apt update"
