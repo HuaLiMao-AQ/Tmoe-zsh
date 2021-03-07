@@ -238,7 +238,7 @@ fi
 ```
 
 If you are using Apple Silicon arm64 CPU, then you should add `brew` to your PATH.  
-如果您正在使用 Apple M1 或其他 Apple arm64 cpu 的 mac 设备，那么请将 **/opt/homebrew/bin** 加入到环境变量中。
+如果您正在使用 Apple M1 或其他 Apple arm64 cpu 的 mac 设备，那么请将 **/opt/homebrew/bin** 加入到 **PATH** 中。
 
 ```bash
 grep -qF '/opt/homebrew/bin' /etc/paths || sudo /usr/bin/sed -i "" '1i \
