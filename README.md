@@ -11,7 +11,7 @@
 
 ### GIF
 
-You can press TAB key to complete.
+You can press <kbd>TAB</kbd> key to complete.
 ![zshtheme completion](https://images.gitee.com/uploads/images/2020/0929/185820_e054932c_7793225.gif)
 
 ### Screenshot
@@ -80,27 +80,44 @@ mv "${ZSHRC_FILE}" "${ZSHRC_FILE}_$(date +%Y%m%d).bak"
     . <(curl -L gitee.com/mo2/zsh/raw/2/2)
 ```
 
-OR
+If you do not live in China, then type
 
 ```shell
-. <(curl -L git.io/zsh.sh)
+    . <(curl -L git.io/zsh.sh)
 ```
 
 2.Debian/Ubuntu/Mint/Kali
 
+如果您使用的是 精简版容器系统，则请先安装 `sudo` 和 `wget`
+
+```shell
+    sudo apt update || su -c "apt update"
+    [[ $(command -v sudo) ]] || su -c "apt install -y sudo"
+    [[ $(command -v eatmydata) ]] || sudo apt install -y eatmydata || su -c "apt install -y eatmydata"
+    [[ $(command -v wget) ]] || sudo eatmydata apt install -y wget || su -c "apt install -y wget"
+```
+
+安装完成后，执行脚本
+
 ```bash
-    sudo apt update
-    sudo apt install -y wget
     bash -c "$(wget -qO- gitee.com/mo2/zsh/raw/2/2)"
 ```
 
-If you do not live in China, then type `bash -c "$(curl -L git.io/zsh.sh)"`
+If you do not live in China, then type
+
+```shell
+    su -c "apt update;apt install -y curl"
+    bash -c "$(curl -L git.io/zsh.sh)"
+```
 
 3.RedHat/Fedora/CentOS
 
 ```bash
-    sudo dnf install -y curl || sudo yum install -y curl
-    bash -c "$(curl -L gitee.com/mo2/zsh/raw/2/2)"
+    if ! grep -q 'Fedora' "/etc/os-release";then
+        [[ -s "/etc/yum.repos.d/epel.repo" ]] || sudo yum install --skip-broken -y epel-release tar dnf
+    fi
+    [[ $(command -v curl) ]] || sudo dnf install -y curl || sudo yum install -y curl
+    bash -c "$(curl -fsSL https://gitee.com/mo2/zsh/raw/2/2)"
 ```
 
 4.Arch/Manjaro
@@ -123,7 +140,7 @@ If you do not live in China, then type `bash -c "$(curl -L git.io/zsh.sh)"`
 6.Alpine/iOS-[iSH](https://ish.app/)
 
 ```bash
-    sudo apk add wget bash
+    apk add bash sudo wget || su -c "apk add bash sudo wget"
     wget -O /tmp/.tmoe-zsh gitee.com/mo2/zsh/raw/2/2
     bash /tmp/.tmoe-zsh
 ```
@@ -157,11 +174,34 @@ If you do not live in China, then type `bash -c "$(curl -L git.io/zsh.sh)"`
 ```
 
 11.Other  
-其它 system 未测试,以下系统请自行解决依赖关系。  
-例如:**GuixSD**等发行版。  
-BSD 系统(例如：**MacOS、FreeBSD、OpenBSD、NetBSD**和**SunOS**等)请参考手动配置步骤
+其它 system 未测试,请自行解决依赖关系。  
+例如:**GuixSD** 和 **nixos**等发行版。  
+相关依赖为 **`zsh git pv wget tar xz newt(whiptail)`**  
+不同发行版的依赖名称是不一样的，以 deb 系发行版为例。  
+其他发行版请参考 [environment 文件](https://github.com/2moe/tmoe-zsh/blob/master/tools/environment)  
+If you want to install dependencies manually, then type the following commands.
 
-相关依赖为 `zsh git pv wget tar xz newt(whiptail)`
+```shell
+    install_dependencies(){
+        [[ -z ${DEPENDENCIES} ]] || sudo eatmydata apt install -y ${DEPENDENCIES} || su -c "apt install -y ${DEPENDENCIES}"
+    }
+    unset DEPENDENCIES
+    if [[ ! -d /usr/share/command-not-found && ! -e "/usr/lib/command-not-found" ]]; then
+        DEPENDENCIES="${DEPENDENCIES} command-not-found"
+    fi
+    [[ -d /usr/share/doc/fonts-powerline ]] || DEPENDENCIES="${DEPENDENCIES} fonts-powerline"
+    [[ $(command -v ar) ]] || DEPENDENCIES="${DEPENDENCIES} binutils"
+    [[ $(command -v xz) ]] || DEPENDENCIES="${DEPENDENCIES} xz-utils"
+    install_dependencies
+
+    unset DEPENDENCIES
+    for i in curl fzf git grep less pv wget whiptail zsh;do
+        [[ $(command -v ${i}) ]] || DEPENDENCIES="${DEPENDENCIES} ${i}"
+    done
+    install_dependencies
+```
+
+Unix 系统(例如：**MacOS、FreeBSD、OpenBSD、NetBSD**和**SunOS**等)请参考手动配置步骤
 
 ### 2-2.MANUALLY GIT CLONE 手动克隆
 
