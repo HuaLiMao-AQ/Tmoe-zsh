@@ -508,5 +508,5 @@ zinit ice wait lucid pick"fast-syntax-highlighting.plugin.zsh" atinit"ZINIT[COMP
 **[maverick9000/zsh2000](https://github.com/maverick9000/zsh2000)**  
 **[marszall87/lambda-pure](https://github.com/marszall87/lambda-pure)**
 
-部分zsh额外主题来自 [oh-my-zsh/external-themes](https://github.com/ohmyzsh/ohmyzsh/wiki/External-themes)  
+部分 zsh 额外主题来自 [oh-my-zsh/external-themes](https://github.com/ohmyzsh/ohmyzsh/wiki/External-themes)  
 If you find a theme loading error, then you can submit an issue.
