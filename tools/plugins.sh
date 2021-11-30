@@ -84,8 +84,8 @@ list_enabled_plugins() {
     done
     unset i
     case ${CATCAT} in
-    "") cat ${HOME}/.zshrc | egrep -v '^#|.zinit/omz/lib' | egrep -n --color=auto '(zinit light|zinit load|zinit snippet).*?#' ;;
-    *) cat ${HOME}/.zshrc | egrep -v '^#|.zinit/omz/lib' | egrep -n --color=auto '(zinit light|zinit load|zinit snippet).*?#' | ${CATCAT} -l zsh --pager "less -m -RFeQ" ;;
+    "") cat ${HOME}/.zshrc | grep -E -v '^#|.zinit/omz/lib' | grep -E -n --color=auto '(zinit light|zinit load|zinit snippet).*?#' ;;
+    *) cat ${HOME}/.zshrc | grep -E -v '^#|.zinit/omz/lib' | grep -E -n --color=auto '(zinit light|zinit load|zinit snippet).*?#' | ${CATCAT} -l zsh --pager "less -m -RFeQ" ;;
     esac
 }
 ##############
@@ -405,7 +405,7 @@ EOF
     ${RETURN_TO_WHERE}
 }
 ######################
-#l | awk '{print $NF}' | egrep '^[d-g]' >233  ;cat 233 |sed 's@^@cat @g' | sed 's@$@/README.md | sed -n 3,4p | tr "\\n\\t" -d | tr -d "*" ; printf "%s\n"  ""@g' >234
+#l | awk '{print $NF}' | grep -E '^[d-g]' >233  ;cat 233 |sed 's@^@cat @g' | sed 's@$@/README.md | sed -n 3,4p | tr "\\n\\t" -d | tr -d "*" ; printf "%s\n"  ""@g' >234
 tmoe_zsh_plugin_menu_02() {
     TMOE_ZSH_SETTINGS_MODEL='01'
     RETURN_TO_WHERE='tmoe_zsh_plugin_menu_02'
@@ -1730,15 +1730,15 @@ case_tmoe_zsh_settings_model() {
 }
 ######################
 check_tmoe_zsh_config_value() {
-    #if ! egrep -q '^[^#]*zinit.*/fast-syntax-highlighting' "${HOME}/.zshrc"; then
-    if egrep -q "^[^#]*zinit.*pick\"${TMOE_ZSH_GREP_NAME}\.(zsh|plugin.zsh)\"" "${TMOE_ZSH_FILE}"; then
+    #if ! grep -Eq '^[^#]*zinit.*/fast-syntax-highlighting' "${HOME}/.zshrc"; then
+    if grep -Eq "^[^#]*zinit.*pick\"${TMOE_ZSH_GREP_NAME}\.(zsh|plugin.zsh)\"" "${TMOE_ZSH_FILE}"; then
         TMOE_ZSH_CONFIG_STATUS="您已启用${TMOE_ZSH_GREP_NAME}插件 You have enabled this plugin."
         TMOE_ZSH_CONFIG_ENABLED=true
-        TMOE_ZSH_CONFIG_LINE=$(cat ${TMOE_ZSH_FILE} | egrep -n "^[^#]*zinit.*pick\"${TMOE_ZSH_GREP_NAME}\.(zsh|plugin.zsh)\"" | head -n 1 | awk '{print $1}' | cut -d ':' -f 1)
-    elif egrep -q "^[^#]*zinit.*snippet.*${TMOE_ZSH_GREP_NAME}/_" "${TMOE_ZSH_FILE}"; then
+        TMOE_ZSH_CONFIG_LINE=$(cat ${TMOE_ZSH_FILE} | grep -E -n "^[^#]*zinit.*pick\"${TMOE_ZSH_GREP_NAME}\.(zsh|plugin.zsh)\"" | head -n 1 | awk '{print $1}' | cut -d ':' -f 1)
+    elif grep -Eq "^[^#]*zinit.*snippet.*${TMOE_ZSH_GREP_NAME}/_" "${TMOE_ZSH_FILE}"; then
         TMOE_ZSH_CONFIG_STATUS="您已启用${TMOE_ZSH_GREP_NAME}插件 You have enabled this zsh plugin."
         TMOE_ZSH_CONFIG_ENABLED='yes'
-        TMOE_ZSH_CONFIG_LINE=$(cat ${TMOE_ZSH_FILE} | egrep -n "^[^#]*zinit.*snippet.*${TMOE_ZSH_GREP_NAME}/_" | head -n 1 | awk '{print $1}' | cut -d ':' -f 1)
+        TMOE_ZSH_CONFIG_LINE=$(cat ${TMOE_ZSH_FILE} | grep -E -n "^[^#]*zinit.*snippet.*${TMOE_ZSH_GREP_NAME}/_" | head -n 1 | awk '{print $1}' | cut -d ':' -f 1)
     else
         TMOE_ZSH_CONFIG_LINE=''
         TMOE_ZSH_CONFIG_STATUS="您已禁用${TMOE_ZSH_GREP_NAME}插件 You have disabled this plugin."
