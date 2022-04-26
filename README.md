@@ -1,7 +1,7 @@
 # Tmoe-zsh 介绍
 
 ```bash
-. <(curl -L gitee.com/mo2/zsh/raw/2/2)
+. <(curl -L l.tmoe.me/ee/zsh)
 ```
 
 > 为 GNU/Linux 和 Android-Termux 配置数百个 zsh 主题和插件。  
@@ -77,13 +77,13 @@ mv "${ZSHRC_FILE}" "${ZSHRC_FILE}_$(date +%Y%m%d).bak"
 1.Android-[Termux](https://termux.com/)
 
 ```bash
-    . <(curl -L gitee.com/mo2/zsh/raw/2/2)
+    . <(curl -L l.tmoe.me/ee/zsh)
 ```
 
 If you do not live in China, then type
 
 ```shell
-    . <(curl -L git.io/zsh.sh)
+    . <(curl -L l.tmoe.me/hub/zsh)
 ```
 
 2.Debian/Ubuntu/Mint/Kali
@@ -100,14 +100,14 @@ If you do not live in China, then type
 安装完成后，执行脚本
 
 ```bash
-    bash -c "$(wget -qO- gitee.com/mo2/zsh/raw/2/2)"
+    bash -c "$(wget -qO- l.tmoe.me/ee/zsh)"
 ```
 
 If you do not live in China, then type
 
 ```shell
     su -c "apt update;apt install -y curl"
-    bash -c "$(curl -L git.io/zsh.sh)"
+    bash -c "$(curl -L l.tmoe.me/hub/zsh)"
 ```
 
 3.RedHat/Fedora/CentOS
@@ -117,14 +117,14 @@ If you do not live in China, then type
         [[ -s "/etc/yum.repos.d/epel.repo" ]] || sudo yum install --skip-broken -y epel-release tar dnf
     fi
     [[ $(command -v curl) ]] || sudo dnf install -y curl || sudo yum install -y curl
-    bash -c "$(curl -fsSL https://gitee.com/mo2/zsh/raw/2/2)"
+    bash -c "$(curl -fsSL https://l.tmoe.me/ee/zsh)"
 ```
 
 4.Arch/Manjaro
 
 ```bash
     [[ $(command -v curl) ]] || sudo pacman -Syu curl
-    bash -c "$(curl -L gitee.com/mo2/zsh/raw/2/2)"
+    bash -c "$(curl -L l.tmoe.me/ee/zsh)"
 ```
 
 5.~~OpenWRT/Entware~~(只测试了 mipsel 架构路由器的 Entware 系统)
@@ -134,14 +134,14 @@ If you do not live in China, then type
 ```bash
     opkg update
     opkg install libustream-openssl ca-bundle ca-certificates wget bash
-    bash -c "$(wget --no-check-certificate -qO- https://gitee.com/mo2/zsh/raw/2/2)"
+    bash -c "$(wget --no-check-certificate -qO- https://l.tmoe.me/ee/zsh)"
 ```
 
 6.Alpine/iOS-[iSH](https://ish.app/)
 
 ```bash
     apk add bash sudo wget || su -c "apk add bash sudo wget"
-    wget -O /tmp/.tmoe-zsh gitee.com/mo2/zsh/raw/2/2
+    wget -O /tmp/.tmoe-zsh l.tmoe.me/ee/zsh
     bash /tmp/.tmoe-zsh
 ```
 
@@ -149,28 +149,28 @@ If you do not live in China, then type
 
 ```bash
     sudo xbps-install -Sy wget
-    bash -c "$(wget -qO- gitee.com/mo2/zsh/raw/2/2)"
+    bash -c "$(wget -qO- l.tmoe.me/ee/zsh)"
 ```
 
 8.Gentoo/Funtoo
 
 ```bash
     emerge -avk net-misc/wget
-    bash -c "$(wget -qO- gitee.com/mo2/zsh/raw/2/2)"
+    bash -c "$(wget -qO- l.tmoe.me/ee/zsh)"
 ```
 
 9.OpenSUSE
 
 ```bash
     sudo zypper in curl
-    bash -c "$(curl -L gitee.com/mo2/zsh/raw/2/2)"
+    bash -c "$(curl -L l.tmoe.me/ee/zsh)"
 ```
 
 10.Solus
 
 ```bash
     sudo eopkg install wget
-    bash -c "$(wget -qO- gitee.com/mo2/zsh/raw/2/2)"
+    bash -c "$(wget -qO- l.tmoe.me/ee/zsh)"
 ```
 
 11.Other  
